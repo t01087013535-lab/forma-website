@@ -1,3 +1,4 @@
+'use client'
 // components/sections/WorkSection.tsx
 import Image from 'next/image'
 import { m } from 'framer-motion'

@@ -1,3 +1,4 @@
+'use client'
 // components/sections/ContactSection.tsx
 import { m } from 'framer-motion'
 import { Mail } from 'lucide-react'

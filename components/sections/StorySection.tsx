@@ -1,3 +1,4 @@
+'use client'
 // components/sections/StorySection.tsx
 import { m } from 'framer-motion'
 import { TextReveal } from '@/components/ui/TextReveal'

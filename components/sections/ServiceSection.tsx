@@ -1,3 +1,4 @@
+'use client'
 // components/sections/ServiceSection.tsx
 import { m } from 'framer-motion'
 import { Pencil, Code2, Rocket } from 'lucide-react'
