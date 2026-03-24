@@ -85,12 +85,21 @@ export function WorkSection() {
                   </div>
                 </TiltCard>
               ) : (
-                <div className="flex aspect-[4/3] flex-col items-center justify-center rounded-2xl border border-[#2a2a2a] bg-[#141414]">
-                  <Lock size={20} style={{ color: '#333', marginBottom: 12 }} aria-hidden="true" />
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: 9, letterSpacing: 3, color: '#333' }}>
-                    {item.index}
-                  </span>
-                  <span style={{ fontSize: 11, color: '#444', marginTop: 4 }}>준비 중</span>
+                <div className="flex flex-col overflow-hidden rounded-2xl border border-[#1e1e1e] bg-[#111] h-full">
+                  <div
+                    className="relative flex flex-1 min-h-[140px] items-center justify-center"
+                    style={{ background: 'linear-gradient(135deg, #141414 0%, #1a1a1a 100%)' }}
+                  >
+                    <div className="absolute top-4 right-4 w-8 h-8 rounded-full border border-[#2a2a2a]" aria-hidden="true" />
+                    <div className="absolute bottom-4 left-4 w-12 h-px bg-[#222]" aria-hidden="true" />
+                    <Lock size={18} style={{ color: '#2a2a2a' }} aria-hidden="true" />
+                  </div>
+                  <div className="p-4 border-t border-[#1e1e1e]">
+                    <p style={{ fontFamily: 'var(--font-mono)', fontSize: 9, letterSpacing: 3, color: '#2a2a2a', marginBottom: 4 }}>
+                      {item.index}
+                    </p>
+                    <p style={{ fontSize: 11, color: '#333' }}>Coming Soon</p>
+                  </div>
                 </div>
               )}
             </m.li>
