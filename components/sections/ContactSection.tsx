@@ -34,7 +34,7 @@ export function ContactSection() {
       </div>
 
       <div className="relative mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16">
-        <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 4, color: '#555', marginBottom: 24 }}>
+        <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 4, color: '#888', marginBottom: 24 }}>
           CONTACT
         </p>
 
@@ -70,7 +70,7 @@ export function ContactSection() {
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-[13px] tracking-[1px]"
-            style={{ color: '#555' }}
+            style={{ color: '#888' }}
           >
             <Mail size={16} aria-hidden="true" />
             {email}

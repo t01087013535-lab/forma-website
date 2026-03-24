@@ -104,7 +104,7 @@ export function HeroSection() {
               fontFamily: 'var(--font-mono)',
               fontSize: 11,
               letterSpacing: 4,
-              color: '#888',
+              color: '#666',
               fontWeight: 600,
             }}
           >
@@ -175,7 +175,7 @@ export function HeroSection() {
                     fontFamily: 'var(--font-mono)',
                     fontSize: 9,
                     letterSpacing: 2,
-                    color: '#999',
+                    color: '#777',
                     marginTop: 2,
                   }}
                 >

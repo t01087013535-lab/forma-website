@@ -31,7 +31,7 @@ export function ServiceSection() {
     <section id="service" className="py-[clamp(80px,12vw,160px)]" style={{ background: 'var(--color-bg)' }} aria-label="서비스">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16">
         <div className="mb-16">
-          <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 4, color: '#888', marginBottom: 16 }}>
+          <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 4, color: '#666', marginBottom: 16 }}>
             SERVICE
           </p>
           <h2 style={{ fontSize: 'var(--text-h1)', fontWeight: 900, letterSpacing: '-0.04em', lineHeight: 1.05 }}>
