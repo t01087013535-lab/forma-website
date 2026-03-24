@@ -39,7 +39,7 @@ export function ContactSection() {
         </p>
 
         <h2
-          className="mb-16"
+          className="mb-8 md:mb-16"
           style={{
             fontFamily: 'var(--font-display)',
             fontStyle: 'italic',

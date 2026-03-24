@@ -68,7 +68,7 @@ export function StorySection() {
                   aria-hidden="true"
                 />
               )}
-              <div className="rounded-2xl border border-[rgba(0,0,0,0.07)] bg-white/60 p-6 mx-0 lg:mx-3 backdrop-blur-sm">
+              <div className="rounded-2xl border border-[rgba(0,0,0,0.07)] bg-white/60 p-6 mx-0 md:mx-2 lg:mx-3 backdrop-blur-sm">
                 <div
                   className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl"
                   style={{ background: 'var(--color-gold-dim)' }}
