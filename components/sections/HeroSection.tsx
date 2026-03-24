@@ -136,7 +136,7 @@ export function HeroSection() {
         {/* 서브카피 */}
         <m.p
           className="mb-12 max-w-[440px] text-[16px] leading-[1.7]"
-          style={{ color: 'var(--color-ink-muted)' }}
+          style={{ color: 'var(--color-ink-muted)', fontFamily: 'var(--font-korean)', letterSpacing: '-0.01em' }}
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}

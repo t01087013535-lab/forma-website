@@ -34,7 +34,7 @@ export function ContactSection() {
       </div>
 
       <div className="relative mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16">
-        <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 4, color: '#888', marginBottom: 24 }}>
+        <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 4, color: '#888', marginBottom: 24, fontFeatureSettings: "'ss01'" }}>
           CONTACT
         </p>
 
