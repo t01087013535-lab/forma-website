@@ -33,7 +33,7 @@ export function ContactSection() {
         FORMA
       </div>
 
-      <div className="relative mx-auto max-w-[1400px] px-8 lg:px-16">
+      <div className="relative mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16">
         <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 4, color: '#555', marginBottom: 24 }}>
           CONTACT
         </p>

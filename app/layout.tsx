@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { LazyMotion, domAnimation } from 'framer-motion'
 import { LenisProvider } from '@/components/layout/LenisProvider'
 import { CustomCursor } from '@/components/ui/CustomCursor'
+import { PreloadResources } from '@/components/layout/PreloadResources'
 import '@/app/globals.css'
 
 export const metadata: Metadata = {
@@ -18,6 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ko">
       <body>
+        <PreloadResources />
         <LazyMotion features={domAnimation}>
           <LenisProvider>
             <CustomCursor />

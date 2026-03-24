@@ -1,21 +1,30 @@
 'use client'
 // components/sections/StorySection.tsx
 import { m } from 'framer-motion'
+import { Flame, ClipboardList, Settings, Wrench, Sparkles } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 import { TextReveal } from '@/components/ui/TextReveal'
 import { stagger, fadeUp, viewportConfig } from '@/lib/animations'
 
-const steps = [
-  { icon: '🔥', title: '첫 프로젝트',  desc: '무수한 오류와\n마주침'           },
-  { icon: '📋', title: '오류 기록',    desc: '실패를 체계적으로\n정리'          },
-  { icon: '⚙️', title: '패턴 발견',   desc: '반복 문제 →\n해결 공식화'         },
-  { icon: '🧰', title: '스킬화',      desc: '해결책을\n재사용 도구로'          },
-  { icon: '✦',  title: 'FORMA',       desc: '완전한 개발\n플랫폼 완성', isLast: true },
+interface Step {
+  icon: LucideIcon
+  title: string
+  desc: string
+  isLast?: boolean
+}
+
+const steps: Step[] = [
+  { icon: Flame,         title: '첫 프로젝트',  desc: '무수한 오류와\n마주침'           },
+  { icon: ClipboardList, title: '오류 기록',    desc: '실패를 체계적으로\n정리'          },
+  { icon: Settings,      title: '패턴 발견',    desc: '반복 문제 →\n해결 공식화'         },
+  { icon: Wrench,        title: '스킬화',       desc: '해결책을\n재사용 도구로'          },
+  { icon: Sparkles,      title: 'FORMA',        desc: '완전한 개발\n플랫폼 완성', isLast: true },
 ]
 
 export function StorySection() {
   return (
     <section id="story" className="py-[clamp(80px,12vw,160px)]" style={{ background: '#ede9e3' }} aria-label="우리의 서사">
-      <div className="mx-auto max-w-[1400px] px-8 lg:px-16">
+      <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16">
         <div className="mb-20">
           <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 4, color: '#888', marginBottom: 16 }}>
             STORY
@@ -60,7 +69,16 @@ export function StorySection() {
                 />
               )}
               <div className="rounded-2xl border border-[rgba(0,0,0,0.07)] bg-white/60 p-6 mx-0 lg:mx-3 backdrop-blur-sm">
-                <div className="mb-4 text-3xl" aria-hidden="true">{step.icon}</div>
+                <div
+                  className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl"
+                  style={{ background: 'var(--color-gold-dim)' }}
+                  aria-hidden="true"
+                >
+                  <step.icon
+                    size={20}
+                    style={{ color: step.isLast ? 'var(--color-gold)' : '#666' }}
+                  />
+                </div>
                 <p style={{ fontFamily: 'var(--font-mono)', fontSize: 9, letterSpacing: 3, color: '#999', marginBottom: 6 }}>
                   0{i + 1}
                 </p>

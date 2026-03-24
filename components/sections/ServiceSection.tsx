@@ -29,7 +29,7 @@ const techTags = ['Next.js', 'React 19', 'Tailwind v4', 'TypeScript', 'Supabase'
 export function ServiceSection() {
   return (
     <section id="service" className="py-[clamp(80px,12vw,160px)]" style={{ background: 'var(--color-bg)' }} aria-label="서비스">
-      <div className="mx-auto max-w-[1400px] px-8 lg:px-16">
+      <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16">
         <div className="mb-16">
           <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 4, color: '#888', marginBottom: 16 }}>
             SERVICE

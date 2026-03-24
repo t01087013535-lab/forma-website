@@ -11,7 +11,7 @@ import { stagger, fadeUp, viewportConfig } from '@/lib/animations'
 export function WorkSection() {
   return (
     <section id="work" className="py-[clamp(80px,12vw,160px)]" style={{ background: 'var(--color-bg)' }} aria-label="포트폴리오">
-      <div className="mx-auto max-w-[1400px] px-8 lg:px-16">
+      <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16">
         <div className="mb-16">
           <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 4, color: '#888', marginBottom: 16 }}>
             WORK

@@ -82,7 +82,7 @@ export function HeroSection() {
       </m.div>
 
       {/* 콘텐츠 */}
-      <div className="relative mx-auto max-w-[1400px] px-8 lg:px-16">
+      <div className="relative mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16">
         {/* 키커 */}
         <m.div
           className="mb-8 flex items-center gap-3"
