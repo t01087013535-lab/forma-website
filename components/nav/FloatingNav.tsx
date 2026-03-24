@@ -68,7 +68,7 @@ export function FloatingNav() {
           {/* 데스크톱 CTA */}
           <a
             href="#contact"
-            className="hidden rounded-full bg-[#0d0d0d] px-5 py-2.5 text-[10px] font-bold tracking-[2px] text-white transition-opacity hover:opacity-75 md:block"
+            className="hidden rounded-full bg-[#0d0d0d] px-5 py-2.5 text-[10px] font-bold tracking-[2px] text-white transition-all hover:bg-[#333] hover:opacity-100 md:block"
           >
             프로젝트 문의 →
           </a>

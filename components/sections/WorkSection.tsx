@@ -49,7 +49,7 @@ export function WorkSection() {
                       <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #f7f5f2, #ede9e3)' }} />
                     )}
                     <span
-                      className="absolute top-3 left-3 rounded-full border border-[rgba(192,169,106,0.4)] bg-[rgba(192,169,106,0.1)] px-3 py-1 text-[9px] font-bold tracking-[2px]"
+                      className="absolute top-3 left-3 rounded-full border border-[rgba(192,169,106,0.4)] bg-[rgba(192,169,106,0.18)] px-3 py-1 text-[9px] font-bold tracking-[2px]"
                       style={{ color: 'var(--color-gold)' }}
                     >
                       LIVE

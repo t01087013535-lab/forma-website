@@ -195,7 +195,7 @@ export function HeroSection() {
         >
           <a
             href="#work"
-            className="rounded-full border border-[#0d0d0d] px-7 py-3.5 text-[13px] font-semibold tracking-[1px] text-[#0d0d0d] transition-all hover:bg-[#0d0d0d] hover:text-white"
+            className="rounded-full border border-[#0d0d0d] px-7 py-3.5 text-[13px] font-semibold tracking-[1px] text-[#0d0d0d] transition-all duration-200 hover:bg-[#0d0d0d] hover:text-white hover:scale-[0.98]"
             style={{ minHeight: 44, display: 'inline-flex', alignItems: 'center' }}
           >
             포트폴리오 보기

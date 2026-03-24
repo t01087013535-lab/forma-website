@@ -26,6 +26,8 @@ export function GlassCard({ children, className = '', animate = true }: GlassCar
       initial="hidden"
       whileInView="visible"
       viewport={viewportConfig}
+      whileHover={{ y: -4 }}
+      transition={{ duration: 0.2 }}
     >
       {children}
     </m.div>
