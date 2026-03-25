@@ -50,13 +50,20 @@ export function WorkSection() {
               whileInView={prefersReduced ? { opacity: 1 } : { opacity: 1, y: 0 }}
               viewport={viewportConfig}
             >
-              {/* hover gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-[32px]" aria-hidden="true" />
+              {/* hover gradient overlay — Stitch blue */}
+              <div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity rounded-[32px]"
+                style={{ background: 'linear-gradient(135deg, var(--color-blue-dim), transparent)' }}
+                aria-hidden="true"
+              />
 
               <div className="relative h-full flex flex-col justify-between">
                 <div className="flex items-start justify-between">
                   <div>
-                    <span className="inline-block border border-white/10 bg-white/5 px-3 py-1 rounded-full text-[11px] font-mono tracking-widest text-blue-400 mb-4">
+                    <span
+                      className="inline-block border px-3 py-1 rounded-full text-[11px] font-mono tracking-widest mb-4"
+                      style={{ borderColor: 'var(--color-blue-glow)', background: 'var(--color-blue-dim)', color: 'var(--color-blue)' }}
+                    >
                       LIVE
                     </span>
                     <h3 className="text-2xl font-bold text-[#ededed] mb-2">{main.name}</h3>

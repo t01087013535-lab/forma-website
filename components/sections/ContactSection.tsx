@@ -69,7 +69,8 @@ export function ContactSection() {
         <div className="flex flex-wrap items-center gap-6">
           <MagneticButton
             href={`mailto:${email}`}
-            className="rounded-full bg-white px-8 py-4 text-[13px] font-bold tracking-[1px] text-[#0d0d0d] transition-colors hover:bg-zinc-200"
+            className="rounded-full px-8 py-4 text-[13px] font-bold tracking-[1px] text-white transition-all duration-200"
+            style={{ background: 'var(--color-blue)' }}
           >
             프로젝트 시작하기 →
           </MagneticButton>

@@ -102,10 +102,11 @@ export function FloatingNav() {
             ))}
           </ul>
 
-          {/* 데스크톱 CTA */}
+          {/* 데스크톱 CTA — Stitch blue */}
           <a
             href="#contact"
-            className="hidden rounded-full bg-white px-5 py-2 text-[13px] font-semibold text-black transition-colors hover:bg-zinc-200 md:block focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black focus-visible:outline-none"
+            className="hidden rounded-full px-5 py-2 text-[13px] font-semibold text-white transition-all duration-200 md:block focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black focus-visible:outline-none"
+            style={{ background: 'var(--color-blue)' }}
           >
             프로젝트 문의 →
           </a>
@@ -164,7 +165,8 @@ export function FloatingNav() {
               <li role="none" className="mt-2 border-t border-white/10 pt-2">
                 <a
                   href="#contact"
-                  className="block rounded-full bg-white px-4 py-3 text-center text-[13px] font-semibold text-black"
+                  className="block rounded-full px-4 py-3 text-center text-[13px] font-semibold text-white"
+                  style={{ background: 'var(--color-blue)' }}
                   role="menuitem"
                   onClick={() => setMenuOpen(false)}
                 >

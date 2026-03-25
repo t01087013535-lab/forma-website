@@ -34,7 +34,8 @@ export function ServiceSection() {
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16">
 
         <m.h2
-          className="text-5xl font-bold tracking-tighter mb-20 text-center"
+          className="text-5xl font-extrabold tracking-tighter mb-20 text-center"
+          style={{ fontFamily: 'var(--font-display)' }}
           initial={prefersReduced ? { opacity: 0 } : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={viewportConfig}
@@ -56,9 +57,9 @@ export function ServiceSection() {
             <li key={title} role="listitem">
               <div
                 className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl"
-                style={{ background: 'rgba(0,0,0,0.06)' }}
+                style={{ background: 'rgba(19,127,236,0.10)' }}
               >
-                <Icon size={22} className="text-black" aria-hidden="true" />
+                <Icon size={22} style={{ color: 'var(--color-blue)' }} aria-hidden="true" />
               </div>
               <h4 className="mb-3 text-[17px] font-bold text-black">{title}</h4>
               <p className="text-sm leading-[1.7] text-zinc-600">{desc}</p>

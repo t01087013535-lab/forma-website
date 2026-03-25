@@ -5,11 +5,12 @@ import { m, useReducedMotion } from 'framer-motion'
 interface MagneticButtonProps {
   children: React.ReactNode
   className?: string
+  style?: React.CSSProperties
   onClick?: () => void
   href?: string
 }
 
-export function MagneticButton({ children, className = '', onClick, href }: MagneticButtonProps) {
+export function MagneticButton({ children, className = '', style, onClick, href }: MagneticButtonProps) {
   const prefersReduced = useReducedMotion()
   const ref = useRef<HTMLDivElement>(null)
   const [pos, setPos] = useState({ x: 0, y: 0 })
@@ -29,6 +30,7 @@ export function MagneticButton({ children, className = '', onClick, href }: Magn
     <m.div
       ref={ref}
       className={className}
+      style={style}
       animate={{ x: pos.x, y: pos.y }}
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
       onMouseMove={handleMouseMove}

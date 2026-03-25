@@ -1,4 +1,5 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -23,8 +24,13 @@
   --color-gold-border: rgba(192, 169, 106, 0.3);
   --color-gold-glow: rgba(192, 169, 106, 0.15);
 
+  /* Stitch 디자인 시스템 토큰 */
+  --color-blue:      #137fec;
+  --color-blue-dim:  rgba(19, 127, 236, 0.12);
+  --color-blue-glow: rgba(19, 127, 236, 0.25);
+
   --font-korean:  'Pretendard', 'Apple SD Gothic Neo', sans-serif;
-  --font-display: 'Playfair Display', Georgia, serif;
+  --font-display: 'Manrope', 'Pretendard', sans-serif;
   --font-sans:    -apple-system, 'Helvetica Neue', sans-serif;
   --font-mono:    'SF Mono', 'Fira Code', monospace;
 
