@@ -7,13 +7,13 @@
 :root {
   --color-bg:        #f7f5f2;
   --color-surface:   #ffffff;
-  --color-ink:       #0d0d0d;
-  --color-ink-muted: #595959;
+  --color-ink:       #ededed;
+  --color-ink-muted: #a1a1a1;
   --color-gold:      #c0a96a;
   --color-gold-dim:  rgba(192, 169, 106, 0.15);
   --color-glass:     rgba(255, 255, 255, 0.55);
   --color-border:    rgba(0, 0, 0, 0.07);
-  --color-dark-bg:   #0d0d0d;
+  --color-dark-bg:   #050505;
   --color-bg-alt:    #ede9e3;
   --color-ink-subtle: #777777;
   --color-gold-subtle: rgba(192, 169, 106, 0.08);
@@ -36,7 +36,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  background-color: var(--color-bg);
+  background-color: var(--color-dark-bg);
   color: var(--color-ink);
   font-family: var(--font-korean);
   -webkit-font-smoothing: antialiased;

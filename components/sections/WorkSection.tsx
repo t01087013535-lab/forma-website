@@ -1,127 +1,172 @@
 'use client'
 // components/sections/WorkSection.tsx
-import Image from 'next/image'
-import { m } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 import { ExternalLink, Lock } from 'lucide-react'
-import { TiltCard } from '@/components/ui/TiltCard'
-import { TextReveal } from '@/components/ui/TextReveal'
 import { portfolioItems } from '@/lib/portfolio-data'
-import { stagger, fadeUp, viewportConfig } from '@/lib/animations'
+import { viewportConfig } from '@/lib/animations'
 
 export function WorkSection() {
+  const prefersReduced = useReducedMotion()
+  const projects = portfolioItems
+
+  // 그리드 슬롯별 프로젝트 인덱스
+  const main    = projects[0]
+  const side    = projects[1]
+  const bottomL = projects[2]
+  const bottomR = projects[3]
+
+  const cardBase =
+    'bg-zinc-900/40 border border-white/5 rounded-[32px] p-10 hover:border-white/20 transition-all overflow-hidden relative'
+
   return (
-    <section id="work" className="py-[clamp(80px,12vw,160px)]" style={{ background: 'var(--color-bg)' }} aria-label="포트폴리오">
+    <section
+      id="work"
+      className="py-[clamp(80px,12vw,160px)]"
+      style={{ background: 'var(--color-dark-bg)' }}
+      aria-label="포트폴리오"
+    >
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16">
-        <div className="mb-16">
-          <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 4, color: 'var(--color-ink-muted)', marginBottom: 16, fontFeatureSettings: "'ss01'" }}>
-            WORK
-          </p>
-          <h2 style={{ fontSize: 'var(--text-h1)', fontWeight: 900, letterSpacing: '-0.04em', lineHeight: 1.05 }}>
-            <TextReveal>Vercel 위에 새긴</TextReveal>
-            <TextReveal delay={0.1}>
-              <span style={{ WebkitTextStroke: '1.5px #0d0d0d', color: 'transparent' }}>다섯 개의 증명</span>
-            </TextReveal>
+
+        {/* 섹션 헤더 */}
+        <div className="mb-16 flex items-end justify-between border-b border-white/10 pb-8">
+          <h2 className="text-4xl font-bold tracking-tighter text-[#ededed]">
+            Selected Work
           </h2>
+          <p className="text-zinc-500 font-mono text-sm">
+            / {projects.length.toString().padStart(2, '0')} PROJECTS
+          </p>
         </div>
 
-        <m.ul
-          className="grid gap-4 grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 lg:overflow-visible overflow-x-auto pb-4"
-          variants={stagger(0.08)}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportConfig}
-          role="list"
-        >
-          {portfolioItems.map((item) => (
-            <m.li key={item.index} variants={fadeUp} role="listitem">
-              {item.isLive ? (
-                <TiltCard className="group relative overflow-hidden rounded-2xl bg-[var(--color-surface)] border border-[rgba(0,0,0,0.07)] transition-all duration-300 hover:border-[var(--color-gold)] hover:shadow-xl">
-                  <div className="relative aspect-[4/3] overflow-hidden bg-[var(--color-bg)]">
-                    {item.thumbnail ? (
-                      <Image
-                        src={item.thumbnail}
-                        alt={item.name}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width:640px) 100vw, (max-width:1024px) 33vw, 20vw"
-                      />
-                    ) : (
-                      <div
-                        className="absolute inset-0 flex items-end p-4"
-                        style={{
-                          background: 'linear-gradient(135deg, #e8e4dd 0%, #d4cfc7 40%, rgba(192,169,106,0.18) 100%)',
-                        }}
-                      >
-                        <span
-                          style={{
-                            fontFamily: 'var(--font-mono)',
-                            fontSize: 9,
-                            letterSpacing: 3,
-                            color: 'rgba(192,169,106,0.7)',
-                            fontWeight: 700,
-                          }}
-                        >
-                          {item.nameEn ?? item.name}
-                        </span>
-                      </div>
-                    )}
-                    <span
-                      className="absolute top-3 left-3 rounded-full border border-[rgba(192,169,106,0.4)] bg-[rgba(192,169,106,0.18)] px-3 py-1 text-[9px] font-bold tracking-[2px]"
-                      style={{ color: 'var(--color-gold)' }}
-                    >
+        {/* Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+
+          {/* 메인 카드 — col-span-8 */}
+          {main && (
+            <m.div
+              className={`md:col-span-8 h-[500px] ${cardBase} group cursor-pointer`}
+              whileHover={{ y: prefersReduced ? 0 : -10 }}
+              transition={prefersReduced ? { duration: 0.01 } : { duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              initial={prefersReduced ? { opacity: 0 } : { opacity: 0, y: 20 }}
+              whileInView={prefersReduced ? { opacity: 1 } : { opacity: 1, y: 0 }}
+              viewport={viewportConfig}
+            >
+              {/* hover gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-[32px]" aria-hidden="true" />
+
+              <div className="relative h-full flex flex-col justify-between">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <span className="inline-block border border-white/10 bg-white/5 px-3 py-1 rounded-full text-[11px] font-mono tracking-widest text-blue-400 mb-4">
                       LIVE
                     </span>
+                    <h3 className="text-2xl font-bold text-[#ededed] mb-2">{main.name}</h3>
+                    {main.nameEn && (
+                      <p className="text-zinc-500 text-sm font-mono">{main.nameEn}</p>
+                    )}
                   </div>
-                  <div className="p-4">
-                    <div className="mb-2 flex items-start justify-between">
-                      <span className="text-[11px] font-bold tracking-[1px]" style={{ color: 'var(--color-ink)' }}>
-                        {item.name}
-                      </span>
-                      {item.url && (
-                        <a
-                          href={item.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`${item.name} 사이트 방문`}
-                        >
-                          <ExternalLink size={14} style={{ color: 'var(--color-ink-muted)' }} />
-                        </a>
-                      )}
-                    </div>
-                    <div className="flex flex-wrap gap-1.5">
-                      {item.tags.map(tag => (
-                        <span
-                          key={tag}
-                          className="rounded-full bg-[var(--color-bg)] px-2.5 py-0.5 text-[9px] font-semibold tracking-[1px]"
-                          style={{ color: 'var(--color-ink-muted)' }}
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </TiltCard>
-              ) : (
-                <div className="flex flex-col overflow-hidden rounded-2xl border border-[var(--color-dark-border)] bg-[var(--color-dark-surface)] h-full transition-all hover:border-white/20">
-                  <div
-                    className="relative flex flex-1 min-h-[140px] items-center justify-center"
-                    style={{ background: 'linear-gradient(135deg, var(--color-dark-surface) 0%, #111111 100%)' }}
-                  >
-                    <div className="absolute top-4 right-4 w-8 h-8 rounded-full border border-[var(--color-dark-border)]" aria-hidden="true" />
-                    <div className="absolute bottom-4 left-4 w-12 h-px bg-[var(--color-dark-border)]" aria-hidden="true" />
-                    <Lock size={18} style={{ color: 'var(--color-dark-border)' }} aria-hidden="true" />
-                  </div>
-                  <div className="p-4 border-t border-[var(--color-dark-border)]">
-                    <p style={{ fontFamily: 'var(--font-mono)', fontSize: 9, letterSpacing: 3, color: 'var(--color-dark-border)', marginBottom: 4 }}>
-                      {item.index}
-                    </p>
-                    <p style={{ fontSize: 11, color: 'var(--color-ink-subtle)' }}>Coming Soon</p>
-                  </div>
+                  {main.url && (
+                    <a
+                      href={main.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${main.name} 사이트 방문`}
+                      className="p-2 rounded-full border border-white/10 hover:border-white/30 transition-colors"
+                    >
+                      <ExternalLink size={16} className="text-zinc-400" aria-hidden="true" />
+                    </a>
+                  )}
                 </div>
-              )}
-            </m.li>
-          ))}
-        </m.ul>
+
+                <div className="flex flex-wrap gap-2" aria-label="사용 기술">
+                  {main.tags.map(tag => (
+                    <span
+                      key={tag}
+                      className="px-3 py-1 rounded-full bg-white/5 text-[10px] border border-white/10 font-mono text-zinc-400"
+                    >
+                      {tag.toUpperCase()}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </m.div>
+          )}
+
+          {/* 사이드 카드 — col-span-4 */}
+          {side && (
+            <m.div
+              className={`md:col-span-4 h-[500px] ${cardBase} flex flex-col justify-between`}
+              whileHover={{ y: prefersReduced ? 0 : -10 }}
+              transition={prefersReduced ? { duration: 0.01 } : { duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              initial={prefersReduced ? { opacity: 0 } : { opacity: 0, y: 20 }}
+              whileInView={prefersReduced ? { opacity: 1 } : { opacity: 1, y: 0 }}
+              viewport={viewportConfig}
+            >
+              <div className="flex items-center justify-center flex-1">
+                <Lock size={32} className="text-white/10" aria-hidden="true" />
+              </div>
+              <div className="border-t border-white/5 pt-6">
+                <p className="font-mono text-[10px] tracking-[3px] text-zinc-600 mb-1">
+                  {side.index}
+                </p>
+                <p className="text-zinc-500 text-sm">Coming Soon</p>
+              </div>
+            </m.div>
+          )}
+
+          {/* 하단 좌측 — col-span-6 */}
+          {bottomL && (
+            <m.div
+              className={`md:col-span-6 h-[400px] ${cardBase} flex flex-col justify-between`}
+              whileHover={{ y: prefersReduced ? 0 : -10 }}
+              transition={prefersReduced ? { duration: 0.01 } : { duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              initial={prefersReduced ? { opacity: 0 } : { opacity: 0, y: 20 }}
+              whileInView={prefersReduced ? { opacity: 1 } : { opacity: 1, y: 0 }}
+              viewport={viewportConfig}
+            >
+              <div className="flex items-center justify-center flex-1">
+                <Lock size={28} className="text-white/10" aria-hidden="true" />
+              </div>
+              <div className="border-t border-white/5 pt-6">
+                <p className="font-mono text-[10px] tracking-[3px] text-zinc-600 mb-1">
+                  {bottomL.index}
+                </p>
+                <p className="text-zinc-500 text-sm">Coming Soon</p>
+              </div>
+            </m.div>
+          )}
+
+          {/* 하단 우측 — col-span-6 (기술 태그) */}
+          {bottomR && (
+            <m.div
+              className={`md:col-span-6 h-[400px] ${cardBase} flex flex-col justify-between`}
+              whileHover={{ y: prefersReduced ? 0 : -10 }}
+              transition={prefersReduced ? { duration: 0.01 } : { duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              initial={prefersReduced ? { opacity: 0 } : { opacity: 0, y: 20 }}
+              whileInView={prefersReduced ? { opacity: 1 } : { opacity: 1, y: 0 }}
+              viewport={viewportConfig}
+            >
+              <div className="flex-1 flex items-center justify-center">
+                <div className="flex flex-wrap gap-2 justify-center max-w-[300px]" aria-label="보유 기술 스택">
+                  {['NEXT.JS', 'TYPESCRIPT', 'REACT 19', 'TAILWIND V4', 'SUPABASE', 'FASTAPI', 'VERCEL'].map(tech => (
+                    <span
+                      key={tech}
+                      className="px-3 py-1 rounded-full bg-white/5 text-[10px] border border-white/10 font-mono text-zinc-400"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="border-t border-white/5 pt-6">
+                <p className="font-mono text-[10px] tracking-[3px] text-zinc-600 mb-1">
+                  {bottomR.index}
+                </p>
+                <p className="text-zinc-500 text-sm">Coming Soon</p>
+              </div>
+            </m.div>
+          )}
+
+        </div>
       </div>
     </section>
   )

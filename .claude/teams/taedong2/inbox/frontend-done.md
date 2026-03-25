@@ -1,12 +1,31 @@
-# HeroSection 구현 완료
+# FORMA 웹사이트 디자인 리빌딩 완료
 
 ## STATUS: DONE
+**작업일:** 2026-03-25
+**빌드:** TypeScript 0 오류, Next.js 16.2.1 static build 성공
 
-## 커밋 해시
-671138c
+---
 
-## 생성 파일
-`/Users/min/forma-website/components/sections/HeroSection.tsx`
+## 완료 태스크
+
+| 태스크 | 파일 | 주요 변경 |
+|--------|------|----------|
+| T1 globals.css | app/globals.css | dark-bg #050505, ink #ededed |
+| T2 FloatingNav | components/nav/FloatingNav.tsx | 다크 테마, tracking-widest, bg-white CTA |
+| T3 HeroSection | components/sections/HeroSection.tsx | 블루 글로우, 배지, 6xl/8xl h1, zinc 서브텍스트 |
+| T4 WorkSection | components/sections/WorkSection.tsx | 12col bento grid, zinc-900/40 카드, whileHover y:-10 |
+| T5 ServiceSection | components/sections/ServiceSection.tsx | bg-white rounded-[48px] 화이트 카드 섹션 |
+| T6 StorySection | components/sections/StorySection.tsx | #0a0a0a 배경, zinc-900/40 카드, #ededed 텍스트 |
+| T7 ContactSection | components/sections/ContactSection.tsx | #050505 배경, #ededed 텍스트 |
+| T7 Footer | components/layout/Footer.tsx | border-white/5, tracking-widest uppercase copyright |
+
+## 체크리스트
+- [x] TypeScript 컴파일 통과
+- [x] m.* LazyMotion 패턴 유지 (motion.* 미사용)
+- [x] useReducedMotion() 처리 전 파일 유지
+- [x] Named export 전용
+- [x] any 타입 미사용
+- [x] WCAG 2.2 AA 접근성 유지 (aria, focus-visible, 44px 터치 타깃)
 
 ## 구현 내용
 - 3D 패럴랙스 기하학 오브젝트 3개 (큰 사각형, 원형, 작은 골드 사각형) — useScroll + useTransform

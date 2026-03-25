@@ -1,9 +1,7 @@
 'use client'
 // components/sections/ServiceSection.tsx
-import { m } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 import { Pencil, Code2, Rocket } from 'lucide-react'
-import { GlassCard } from '@/components/ui/GlassCard'
-import { TextReveal } from '@/components/ui/TextReveal'
 import { stagger, viewportConfig } from '@/lib/animations'
 
 const services = [
@@ -24,26 +22,30 @@ const services = [
   },
 ]
 
-const techTags = ['Next.js', 'React 19', 'Tailwind v4', 'TypeScript', 'Supabase', 'FastAPI', 'Vercel']
-
 export function ServiceSection() {
+  const prefersReduced = useReducedMotion()
+
   return (
-    <section id="service" className="py-[clamp(80px,12vw,160px)]" style={{ background: 'var(--color-bg)' }} aria-label="서비스">
+    <section
+      id="service"
+      className="py-32 bg-white text-black rounded-[48px] mx-4 mb-4"
+      aria-label="서비스"
+    >
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16">
-        <div className="mb-16">
-          <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 4, color: 'var(--color-ink-muted)', marginBottom: 16, fontFeatureSettings: "'ss01'" }}>
-            SERVICE
-          </p>
-          <h2 style={{ fontSize: 'var(--text-h1)', fontWeight: 900, letterSpacing: '-0.04em', lineHeight: 1.05 }}>
-            <TextReveal>웹의 처음부터 끝까지,</TextReveal>
-            <TextReveal delay={0.1}>
-              <span style={{ WebkitTextStroke: '1.5px #0d0d0d', color: 'transparent' }}>하나의 팀이 책임집니다</span>
-            </TextReveal>
-          </h2>
-        </div>
+
+        <m.h2
+          className="text-5xl font-bold tracking-tighter mb-20 text-center"
+          initial={prefersReduced ? { opacity: 0 } : { opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={viewportConfig}
+          transition={prefersReduced ? { duration: 0.01 } : { duration: 0.6 }}
+        >
+          웹의 처음부터 끝까지,<br />
+          하나의 팀이 책임집니다
+        </m.h2>
 
         <m.ul
-          className="mb-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+          className="grid gap-16 md:grid-cols-3"
           variants={stagger(0.1)}
           initial="hidden"
           whileInView="visible"
@@ -51,39 +53,19 @@ export function ServiceSection() {
           role="list"
         >
           {services.map(({ icon: Icon, title, desc }) => (
-            <li key={title} role="listitem" className="group">
-              <GlassCard className="flex h-full flex-col p-8 transition-all duration-300 group-hover:border-[var(--color-gold)]">
-                <div
-                  className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl transition-colors duration-300 group-hover:bg-[var(--color-gold-dim)]"
-                  style={{ background: 'var(--color-gold-dim)' }}
-                >
-                  <Icon size={22} style={{ color: 'var(--color-gold)' }} aria-hidden="true" />
-                </div>
-                <h3 className="mb-3 text-[17px] font-bold" style={{ color: 'var(--color-ink)' }}>{title}</h3>
-                <p className="text-[14px] leading-[1.7]" style={{ color: 'var(--color-ink-muted)' }}>{desc}</p>
-              </GlassCard>
+            <li key={title} role="listitem">
+              <div
+                className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl"
+                style={{ background: 'rgba(0,0,0,0.06)' }}
+              >
+                <Icon size={22} className="text-black" aria-hidden="true" />
+              </div>
+              <h4 className="mb-3 text-[17px] font-bold text-black">{title}</h4>
+              <p className="text-sm leading-[1.7] text-zinc-600">{desc}</p>
             </li>
           ))}
         </m.ul>
 
-        <m.div
-          className="flex flex-wrap gap-2"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={viewportConfig}
-          transition={{ duration: 0.6 }}
-          aria-label="사용 기술 스택"
-        >
-          {techTags.map(tag => (
-            <span
-              key={tag}
-              className="rounded-full border border-[rgba(0,0,0,0.1)] bg-[var(--color-surface)] px-4 py-1.5 text-[11px] font-semibold tracking-[1px]"
-              style={{ color: 'var(--color-ink-muted)' }}
-            >
-              {tag}
-            </span>
-          ))}
-        </m.div>
       </div>
     </section>
   )

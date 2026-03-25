@@ -3,9 +3,9 @@ import { useEffect, useRef, useState } from 'react'
 import { m, useReducedMotion } from 'framer-motion'
 
 const navLinks = [
-  { href: '#work',    label: 'Work'    },
-  { href: '#story',   label: 'Story'   },
-  { href: '#service', label: 'Service' },
+  { href: '#work',    label: 'WORK'    },
+  { href: '#story',   label: 'STORY'   },
+  { href: '#service', label: 'SERVICE' },
 ]
 
 export function FloatingNav() {
@@ -36,7 +36,6 @@ export function FloatingNav() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Close menu on resize to desktop
   useEffect(() => {
     function onResize() {
       if (window.innerWidth >= 768) setMenuOpen(false)
@@ -45,7 +44,6 @@ export function FloatingNav() {
     return () => window.removeEventListener('resize', onResize)
   }, [])
 
-  // Escape 키 닫기 + 열릴 때 첫 링크 포커스
   useEffect(() => {
     if (menuOpen) {
       firstLinkRef.current?.focus()
@@ -69,7 +67,7 @@ export function FloatingNav() {
     >
       <a
         href="#hero"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-[13px] focus:font-semibold focus:text-[#0d0d0d] focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#0d0d0d] focus:ring-offset-2"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-[13px] focus:font-semibold focus:text-[#0d0d0d] focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
       >
         본문으로 바로가기
       </a>
@@ -77,16 +75,16 @@ export function FloatingNav() {
         <nav
           className="flex items-center justify-between rounded-full px-6 py-3 transition-all duration-500"
           style={{
-            background:           scrolled ? 'rgba(255,255,255,0.55)' : 'transparent',
-            backdropFilter:       scrolled ? 'blur(20px)'             : 'none',
-            WebkitBackdropFilter: scrolled ? 'blur(20px)'             : 'none',
-            border:               scrolled ? '1px solid rgba(255,255,255,0.85)' : '1px solid transparent',
-            boxShadow:            scrolled ? '0 4px 30px rgba(0,0,0,0.06)'     : 'none',
+            background:           scrolled ? 'rgba(0,0,0,0.6)'              : 'transparent',
+            backdropFilter:       scrolled ? 'blur(24px)'                   : 'none',
+            WebkitBackdropFilter: scrolled ? 'blur(24px)'                   : 'none',
+            border:               scrolled ? '1px solid rgba(255,255,255,0.10)' : '1px solid transparent',
+            boxShadow:            scrolled ? '0 4px 30px rgba(0,0,0,0.3)'   : 'none',
           }}
           aria-label="주 네비게이션"
         >
           {/* 로고 */}
-          <a href="#hero" className="text-[11px] font-bold tracking-[4px] text-[#0d0d0d]">
+          <a href="#hero" className="text-[11px] font-bold tracking-[4px] text-[#ededed]">
             FORMA<span style={{ color: 'var(--color-gold)' }}>.</span>
           </a>
 
@@ -96,7 +94,7 @@ export function FloatingNav() {
               <li key={href}>
                 <a
                   href={href}
-                  className="text-[11px] font-medium tracking-[2px] text-[var(--color-ink-subtle)] transition-colors hover:text-[#0d0d0d]"
+                  className="text-[13px] font-medium tracking-widest text-zinc-400 transition-colors hover:text-[#ededed]"
                 >
                   {label}
                 </a>
@@ -107,7 +105,7 @@ export function FloatingNav() {
           {/* 데스크톱 CTA */}
           <a
             href="#contact"
-            className="hidden rounded-full bg-[#0d0d0d] px-5 py-2.5 text-[10px] font-bold tracking-[2px] text-white transition-all hover:bg-[var(--color-dark-surface)] hover:opacity-100 md:block focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:outline-none"
+            className="hidden rounded-full bg-white px-5 py-2 text-[13px] font-semibold text-black transition-colors hover:bg-zinc-200 md:block focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black focus-visible:outline-none"
           >
             프로젝트 문의 →
           </a>
@@ -124,15 +122,15 @@ export function FloatingNav() {
           >
             <span className="flex flex-col gap-1.5" aria-hidden="true">
               <span
-                className="block h-0.5 w-5 bg-[#0d0d0d] transition-all duration-300"
+                className="block h-0.5 w-5 bg-[#ededed] transition-all duration-300"
                 style={{ transform: menuOpen ? 'translateY(8px) rotate(45deg)' : 'none' }}
               />
               <span
-                className="block h-0.5 w-5 bg-[#0d0d0d] transition-all duration-300"
+                className="block h-0.5 w-5 bg-[#ededed] transition-all duration-300"
                 style={{ opacity: menuOpen ? 0 : 1 }}
               />
               <span
-                className="block h-0.5 w-5 bg-[#0d0d0d] transition-all duration-300"
+                className="block h-0.5 w-5 bg-[#ededed] transition-all duration-300"
                 style={{ transform: menuOpen ? 'translateY(-8px) rotate(-45deg)' : 'none' }}
               />
             </span>
@@ -144,8 +142,8 @@ export function FloatingNav() {
           <div
             ref={menuRef}
             id="mobile-nav-menu"
-            className="absolute top-full left-0 right-0 mt-2 rounded-2xl border border-white/80 bg-white/90 p-4 backdrop-blur-xl md:hidden"
-            style={{ boxShadow: '0 8px 32px rgba(0,0,0,0.08)' }}
+            className="absolute top-full left-0 right-0 mt-2 rounded-2xl border border-white/10 bg-black/80 p-4 backdrop-blur-xl md:hidden"
+            style={{ boxShadow: '0 8px 32px rgba(0,0,0,0.4)' }}
             role="menu"
             onKeyDown={handleMenuKeyDown}
           >
@@ -155,7 +153,7 @@ export function FloatingNav() {
                   <a
                     ref={index === 0 ? firstLinkRef : undefined}
                     href={href}
-                    className="block rounded-xl px-4 py-3 text-[13px] font-medium tracking-[2px] text-[var(--color-ink-subtle)] transition-colors hover:bg-[var(--color-bg)] hover:text-[#0d0d0d]"
+                    className="block rounded-xl px-4 py-3 text-[13px] font-medium tracking-widest text-zinc-400 transition-colors hover:bg-white/5 hover:text-[#ededed]"
                     role="menuitem"
                     onClick={() => setMenuOpen(false)}
                   >
@@ -163,10 +161,10 @@ export function FloatingNav() {
                   </a>
                 </li>
               ))}
-              <li role="none" className="mt-2 border-t border-[rgba(0,0,0,0.06)] pt-2">
+              <li role="none" className="mt-2 border-t border-white/10 pt-2">
                 <a
                   href="#contact"
-                  className="block rounded-full bg-[#0d0d0d] px-4 py-3 text-center text-[12px] font-bold tracking-[2px] text-white"
+                  className="block rounded-full bg-white px-4 py-3 text-center text-[13px] font-semibold text-black"
                   role="menuitem"
                   onClick={() => setMenuOpen(false)}
                 >

@@ -10,10 +10,10 @@ export function Footer() {
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16">
         <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p style={{ fontFamily: 'var(--font-mono)', fontSize: 13, letterSpacing: 4, color: 'var(--color-ink-inverted)', fontWeight: 700, marginBottom: 6 }}>
-              FORMA
+            <p className="font-mono text-[13px] tracking-[4px] text-[#ededed] font-bold mb-1.5">
+              FORMA<span style={{ color: 'var(--color-gold)' }}>.</span>
             </p>
-            <p style={{ fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: 2, color: 'var(--color-ink-subtle)' }}>
+            <p className="font-mono text-[10px] tracking-[2px] text-zinc-600">
               by Taedong
             </p>
           </div>
@@ -23,8 +23,7 @@ export function Footer() {
                 <li key={href}>
                   <a
                     href={href}
-                    style={{ fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: 2, color: 'var(--color-ink-subtle)', textDecoration: 'none' }}
-                    className="transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d0d0d] focus-visible:outline-none"
+                    className="font-mono text-[10px] tracking-widest uppercase text-zinc-600 no-underline transition-colors hover:text-[#ededed] focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black focus-visible:outline-none"
                   >
                     {(['WORK', 'STORY', 'SERVICE', 'CONTACT'] as const)[i]}
                   </a>
@@ -35,12 +34,11 @@ export function Footer() {
           <div style={{ textAlign: 'right' }}>
             <a
               href={`mailto:${process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? 'hello@forma.kr'}`}
-              style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 1, color: 'var(--color-ink-subtle)', textDecoration: 'none' }}
-              className="transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d0d0d] focus-visible:outline-none"
+              className="font-mono text-[11px] tracking-[1px] text-zinc-600 no-underline transition-colors hover:text-[#ededed] focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black focus-visible:outline-none"
             >
               {process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? 'hello@forma.kr'}
             </a>
-            <p style={{ fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: 2, color: 'var(--color-ink-subtle)', marginTop: 4 }}>
+            <p className="font-mono text-[10px] tracking-widest uppercase text-zinc-600 mt-1">
               © {currentYear} FORMA by Taedong
             </p>
           </div>

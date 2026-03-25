@@ -1,6 +1,6 @@
 'use client'
 // components/sections/ContactSection.tsx
-import { m } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 import { Mail } from 'lucide-react'
 import { MagneticButton } from '@/components/ui/MagneticButton'
 import { TextReveal } from '@/components/ui/TextReveal'
@@ -9,6 +9,8 @@ const email    = process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? 'hello@forma.kr'
 const kakaoUrl = process.env.NEXT_PUBLIC_KAKAO_URL
 
 export function ContactSection() {
+  const prefersReduced = useReducedMotion()
+
   return (
     <section
       id="contact"
@@ -34,11 +36,14 @@ export function ContactSection() {
       </div>
 
       <div className="relative mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16">
-        <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 4, color: 'var(--color-ink-subtle)', marginBottom: 24, fontFeatureSettings: "'ss01'" }}>
+        <p
+          className="font-mono text-[11px] tracking-[4px] text-zinc-600 mb-6"
+          style={{ fontFeatureSettings: "'ss01'" }}
+        >
           CONTACT
         </p>
 
-        <h2
+        <m.h2
           className="mb-8 md:mb-16"
           style={{
             fontFamily: 'var(--font-display)',
@@ -47,20 +52,24 @@ export function ContactSection() {
             fontWeight: 700,
             letterSpacing: '-0.03em',
             lineHeight: 1.1,
-            color: 'var(--color-ink-inverted)',
+            color: '#ededed',
           }}
+          initial={prefersReduced ? { opacity: 0 } : { opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={prefersReduced ? { duration: 0.01 } : { duration: 0.6 }}
         >
           <TextReveal>당신의 비전에</TextReveal>
           <TextReveal delay={0.1}>형태를 부여할</TextReveal>
           <TextReveal delay={0.2}>
             <span style={{ color: 'var(--color-gold)' }}>준비가 됐습니다</span>
           </TextReveal>
-        </h2>
+        </m.h2>
 
         <div className="flex flex-wrap items-center gap-6">
           <MagneticButton
             href={`mailto:${email}`}
-            className="rounded-full bg-white px-8 py-4 text-[13px] font-bold tracking-[1px] text-[#0d0d0d] transition-opacity hover:opacity-80"
+            className="rounded-full bg-white px-8 py-4 text-[13px] font-bold tracking-[1px] text-[#0d0d0d] transition-colors hover:bg-zinc-200"
           >
             프로젝트 시작하기 →
           </MagneticButton>
@@ -70,8 +79,7 @@ export function ContactSection() {
               href={kakaoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-[13px] tracking-[1px]"
-              style={{ color: 'var(--color-ink-subtle)' }}
+              className="flex items-center gap-2 text-[13px] tracking-[1px] text-zinc-500 hover:text-zinc-300 transition-colors"
             >
               <Mail size={16} aria-hidden="true" />
               {email}
