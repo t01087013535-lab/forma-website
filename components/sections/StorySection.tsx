@@ -39,8 +39,8 @@ export function StorySection() {
             STORY
           </p>
           <m.h2
-            className="text-[clamp(36px,5.5vw,64px)] font-extrabold tracking-tight leading-[1.05] text-[#ededed]"
-            style={{ fontFamily: 'var(--font-display)' }}
+            className="text-[clamp(36px,5.5vw,64px)] font-light tracking-tight leading-[1.05] text-[#ededed]"
+            style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}
             initial={prefersReduced ? { opacity: 0 } : { opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={viewportConfig}

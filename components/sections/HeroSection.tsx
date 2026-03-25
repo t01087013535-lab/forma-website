@@ -36,16 +36,16 @@ export function HeroSection() {
           </span>
         </m.div>
 
-        {/* 헤드라인 — Manrope (Stitch font) */}
+        {/* 헤드라인 — Cormorant Garamond */}
         <m.h1
-          className="mb-8 text-6xl md:text-8xl font-extrabold tracking-tight"
-          style={{ lineHeight: 0.9, color: '#ededed', fontFamily: 'var(--font-display)' }}
+          className="mb-8 text-6xl md:text-8xl font-light tracking-tight"
+          style={{ lineHeight: 0.88, color: '#ededed', fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}
           initial={prefersReduced ? { opacity: 0 } : { opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={prefersReduced ? { duration: 0.01 } : { duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
         >
           당신의 비전에<br />
-          <span style={{ color: 'var(--color-blue)' }}>형태를 부여합니다</span>
+          <span style={{ color: 'var(--color-blue)', fontStyle: 'italic', fontWeight: 500 }}>형태를 부여합니다</span>
         </m.h1>
 
         {/* 서브카피 */}

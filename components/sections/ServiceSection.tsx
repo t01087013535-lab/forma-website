@@ -34,8 +34,8 @@ export function ServiceSection() {
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16">
 
         <m.h2
-          className="text-5xl font-extrabold tracking-tighter mb-20 text-center"
-          style={{ fontFamily: 'var(--font-display)' }}
+          className="text-5xl font-light tracking-tight mb-20 text-center"
+          style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}
           initial={prefersReduced ? { opacity: 0 } : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={viewportConfig}

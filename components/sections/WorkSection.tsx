@@ -29,7 +29,10 @@ export function WorkSection() {
 
         {/* 섹션 헤더 */}
         <div className="mb-16 flex items-end justify-between border-b border-white/10 pb-8">
-          <h2 className="text-4xl font-bold tracking-tighter text-[#ededed]">
+          <h2
+            className="text-4xl font-light tracking-tight text-[#ededed]"
+            style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}
+          >
             Selected Work
           </h2>
           <p className="text-zinc-500 font-mono text-sm">

@@ -49,9 +49,9 @@ export function ContactSection() {
             fontFamily: 'var(--font-display)',
             fontStyle: 'italic',
             fontSize: 'var(--text-h1)',
-            fontWeight: 700,
-            letterSpacing: '-0.03em',
-            lineHeight: 1.1,
+            fontWeight: 300,
+            letterSpacing: '-0.02em',
+            lineHeight: 1.05,
             color: '#ededed',
           }}
           initial={prefersReduced ? { opacity: 0 } : { opacity: 0, y: 20 }}
