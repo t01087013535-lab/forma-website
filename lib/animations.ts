@@ -1,16 +1,12 @@
 // lib/animations.ts
-// NOTE: prefersReducedMotion은 클라이언트에서만 평가됩니다.
-// SSR에서는 false(기본값)로 fallback — 클라이언트에서 hydration 후 올바르게 동작.
-const prefersReducedMotionValue =
-  typeof window !== 'undefined'
-    ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    : false
+// prefersReducedMotion은 컴포넌트 내부에서 useReducedMotion()으로 평가합니다.
+// 모듈 최상위 window 평가를 제거해 SSR hydration 불일치를 방지합니다.
 
-const duration = prefersReducedMotionValue ? 0 : 0.6
-const durationFast = prefersReducedMotionValue ? 0 : 0.35
+const duration = 0.6
+const durationFast = 0.35
 
 export const fadeUp = {
-  hidden:  { opacity: 0, y: prefersReducedMotionValue ? 0 : 32 },
+  hidden:  { opacity: 0, y: 32 },
   visible: { opacity: 1, y: 0, transition: { duration, ease: [0.22, 1, 0.36, 1] } },
 }
 
@@ -25,8 +21,27 @@ export const textRevealVariant = {
 }
 
 export const scaleIn = {
-  hidden:  { opacity: 0, scale: prefersReducedMotionValue ? 1 : 0.92 },
+  hidden:  { opacity: 0, scale: 0.92 },
   visible: { opacity: 1, scale: 1, transition: { duration, ease: [0.22, 1, 0.36, 1] } },
 }
 
 export const viewportConfig = { once: true, margin: '-80px' }
+
+// prefers-reduced-motion 활성화 시 사용하는 zero-motion variants
+export const reducedFadeUp = {
+  hidden:  { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0 } },
+}
+
+export const reducedScaleIn = {
+  hidden:  { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0 } },
+}
+
+export const reducedTextReveal = {
+  hidden:  { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0 } },
+}
+
+// durationFast는 향후 사용을 위해 export 유지
+export { durationFast }

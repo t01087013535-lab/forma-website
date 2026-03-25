@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { m } from 'framer-motion'
 
 const navLinks = [
@@ -11,6 +11,23 @@ const navLinks = [
 export function FloatingNav() {
   const [scrolled, setScrolled]   = useState(false)
   const [menuOpen, setMenuOpen]   = useState(false)
+  const firstLinkRef              = useRef<HTMLAnchorElement>(null)
+  const hamburgerRef              = useRef<HTMLButtonElement>(null)
+  const menuRef                   = useRef<HTMLDivElement>(null)
+
+  function handleMenuKeyDown(e: React.KeyboardEvent) {
+    if (!menuOpen) return
+    if (e.key !== 'Tab') return
+    const focusables = menuRef.current?.querySelectorAll<HTMLElement>('a, button')
+    if (!focusables || focusables.length === 0) return
+    const first = focusables[0]
+    const last  = focusables[focusables.length - 1]
+    if (e.shiftKey) {
+      if (document.activeElement === first) { e.preventDefault(); last.focus() }
+    } else {
+      if (document.activeElement === last) { e.preventDefault(); first.focus() }
+    }
+  }
 
   useEffect(() => {
     function onScroll() { setScrolled(window.scrollY > 20) }
@@ -27,6 +44,21 @@ export function FloatingNav() {
     return () => window.removeEventListener('resize', onResize)
   }, [])
 
+  // Escape 키 닫기 + 열릴 때 첫 링크 포커스
+  useEffect(() => {
+    if (menuOpen) {
+      firstLinkRef.current?.focus()
+      const handleEsc = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          setMenuOpen(false)
+          hamburgerRef.current?.focus()
+        }
+      }
+      document.addEventListener('keydown', handleEsc)
+      return () => document.removeEventListener('keydown', handleEsc)
+    }
+  }, [menuOpen])
+
   return (
     <m.header
       className="fixed top-0 left-0 right-0 z-50 px-5 sm:px-8 pt-6"
@@ -34,6 +66,12 @@ export function FloatingNav() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     >
+      <a
+        href="#hero"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-[13px] focus:font-semibold focus:text-[#0d0d0d] focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#0d0d0d] focus:ring-offset-2"
+      >
+        본문으로 바로가기
+      </a>
       <div className="relative mx-auto max-w-[1400px]">
         <nav
           className="flex items-center justify-between rounded-full px-6 py-3 transition-all duration-500"
@@ -75,6 +113,7 @@ export function FloatingNav() {
 
           {/* 모바일 햄버거 버튼 */}
           <button
+            ref={hamburgerRef}
             className="flex h-10 w-10 items-center justify-center md:hidden"
             onClick={() => setMenuOpen((o) => !o)}
             aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'}
@@ -102,15 +141,18 @@ export function FloatingNav() {
         {/* 모바일 드롭다운 메뉴 */}
         {menuOpen && (
           <div
+            ref={menuRef}
             id="mobile-nav-menu"
             className="absolute top-full left-0 right-0 mt-2 rounded-2xl border border-white/80 bg-white/90 p-4 backdrop-blur-xl md:hidden"
             style={{ boxShadow: '0 8px 32px rgba(0,0,0,0.08)' }}
             role="menu"
+            onKeyDown={handleMenuKeyDown}
           >
             <ul className="flex flex-col gap-1" role="list">
-              {navLinks.map(({ href, label }) => (
+              {navLinks.map(({ href, label }, index) => (
                 <li key={href} role="none">
                   <a
+                    ref={index === 0 ? firstLinkRef : undefined}
                     href={href}
                     className="block rounded-xl px-4 py-3 text-[13px] font-medium tracking-[2px] text-[#666] transition-colors hover:bg-[var(--color-bg)] hover:text-[#0d0d0d]"
                     role="menuitem"

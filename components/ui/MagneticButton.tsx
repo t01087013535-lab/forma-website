@@ -1,6 +1,6 @@
 'use client'
 import { useRef, useState } from 'react'
-import { m } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 
 interface MagneticButtonProps {
   children: React.ReactNode
@@ -10,10 +10,12 @@ interface MagneticButtonProps {
 }
 
 export function MagneticButton({ children, className = '', onClick, href }: MagneticButtonProps) {
+  const prefersReduced = useReducedMotion()
   const ref = useRef<HTMLDivElement>(null)
   const [pos, setPos] = useState({ x: 0, y: 0 })
 
   function handleMouseMove(e: React.MouseEvent) {
+    if (prefersReduced) return
     if (!ref.current) return
     const rect = ref.current.getBoundingClientRect()
     const x = (e.clientX - rect.left - rect.width / 2) * 0.3
@@ -37,6 +39,30 @@ export function MagneticButton({ children, className = '', onClick, href }: Magn
     </m.div>
   )
 
-  if (href) return <a href={href}>{inner}</a>
-  return inner
+  if (href) {
+    return (
+      <a
+        href={href}
+        className="focus-visible:ring-2 focus-visible:ring-[#0d0d0d] focus-visible:ring-offset-2 focus-visible:outline-none"
+        style={{ minHeight: 44, display: 'inline-flex', alignItems: 'center' }}
+      >
+        {inner}
+      </a>
+    )
+  }
+
+  return (
+    <div
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          onClick?.()
+        }
+      }}
+    >
+      {inner}
+    </div>
+  )
 }

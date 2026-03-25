@@ -1,12 +1,14 @@
 'use client'
 import { useRef, useState } from 'react'
-import { m } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 
 export function TiltCard({ children, className = '' }: { children: React.ReactNode; className?: string }) {
+  const prefersReduced = useReducedMotion()
   const ref = useRef<HTMLDivElement>(null)
   const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0 })
 
   function handleMouseMove(e: React.MouseEvent) {
+    if (prefersReduced) return
     if (!ref.current) return
     const rect = ref.current.getBoundingClientRect()
     const x = (e.clientX - rect.left) / rect.width  - 0.5

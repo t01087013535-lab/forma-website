@@ -1,8 +1,9 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { m, useMotionValue, useSpring } from 'framer-motion'
+import { m, useMotionValue, useSpring, useReducedMotion } from 'framer-motion'
 
 export function CustomCursor() {
+  const prefersReduced = useReducedMotion()
   const [hovered, setHovered] = useState(false)
   const mouseX = useMotionValue(-100)
   const mouseY = useMotionValue(-100)
@@ -10,16 +11,30 @@ export function CustomCursor() {
   const springY = useSpring(mouseY, { stiffness: 500, damping: 40 })
 
   useEffect(() => {
+    if (prefersReduced) return
+
     function onMove(e: MouseEvent) { mouseX.set(e.clientX); mouseY.set(e.clientY) }
     function onEnter() { setHovered(true) }
     function onLeave() { setHovered(false) }
+
+    const interactables = document.querySelectorAll('a, button, [role="button"]')
+
     window.addEventListener('mousemove', onMove)
-    document.querySelectorAll('a, button, [role="button"]').forEach(el => {
+    interactables.forEach(el => {
       el.addEventListener('mouseenter', onEnter)
       el.addEventListener('mouseleave', onLeave)
     })
-    return () => { window.removeEventListener('mousemove', onMove) }
-  }, [mouseX, mouseY])
+
+    return () => {
+      window.removeEventListener('mousemove', onMove)
+      interactables.forEach(el => {
+        el.removeEventListener('mouseenter', onEnter)
+        el.removeEventListener('mouseleave', onLeave)
+      })
+    }
+  }, [mouseX, mouseY, prefersReduced])
+
+  if (prefersReduced) return null
 
   return (
     <m.div
