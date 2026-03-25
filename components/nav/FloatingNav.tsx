@@ -86,7 +86,7 @@ export function FloatingNav() {
           aria-label="주 네비게이션"
         >
           {/* 로고 */}
-          <a href="#" className="text-[11px] font-bold tracking-[4px] text-[#0d0d0d]">
+          <a href="#hero" className="text-[11px] font-bold tracking-[4px] text-[#0d0d0d]">
             FORMA<span style={{ color: 'var(--color-gold)' }}>.</span>
           </a>
 
@@ -96,7 +96,7 @@ export function FloatingNav() {
               <li key={href}>
                 <a
                   href={href}
-                  className="text-[11px] font-medium tracking-[2px] text-[#6b6b6b] transition-colors hover:text-[#0d0d0d]"
+                  className="text-[11px] font-medium tracking-[2px] text-[var(--color-ink-subtle)] transition-colors hover:text-[#0d0d0d]"
                 >
                   {label}
                 </a>
@@ -107,7 +107,7 @@ export function FloatingNav() {
           {/* 데스크톱 CTA */}
           <a
             href="#contact"
-            className="hidden rounded-full bg-[#0d0d0d] px-5 py-2.5 text-[10px] font-bold tracking-[2px] text-white transition-all hover:bg-[#333] hover:opacity-100 md:block"
+            className="hidden rounded-full bg-[#0d0d0d] px-5 py-2.5 text-[10px] font-bold tracking-[2px] text-white transition-all hover:bg-[var(--color-dark-surface)] hover:opacity-100 md:block focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:outline-none"
           >
             프로젝트 문의 →
           </a>
@@ -155,7 +155,7 @@ export function FloatingNav() {
                   <a
                     ref={index === 0 ? firstLinkRef : undefined}
                     href={href}
-                    className="block rounded-xl px-4 py-3 text-[13px] font-medium tracking-[2px] text-[#666] transition-colors hover:bg-[var(--color-bg)] hover:text-[#0d0d0d]"
+                    className="block rounded-xl px-4 py-3 text-[13px] font-medium tracking-[2px] text-[var(--color-ink-subtle)] transition-colors hover:bg-[var(--color-bg)] hover:text-[#0d0d0d]"
                     role="menuitem"
                     onClick={() => setMenuOpen(false)}
                   >

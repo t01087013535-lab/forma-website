@@ -12,7 +12,7 @@ export function GlassCard({ children, className = '', animate = true }: GlassCar
   const prefersReduced = useReducedMotion()
 
   const style: React.CSSProperties = {
-    background: 'rgba(255,255,255,0.55)',
+    background: 'var(--color-glass)',
     backdropFilter: 'blur(20px)',
     WebkitBackdropFilter: 'blur(20px)',
     border: '1px solid rgba(255,255,255,0.85)',

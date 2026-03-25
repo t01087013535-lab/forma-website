@@ -64,7 +64,7 @@ export function StorySection() {
               {i < steps.length - 1 && (
                 <div
                   className="absolute top-[calc(1.5rem+20px)] left-[calc(50%+32px)] right-0 hidden h-px lg:block"
-                  style={{ background: 'linear-gradient(90deg, rgba(0,0,0,0.15), transparent)' }}
+                  style={{ background: 'linear-gradient(90deg, var(--color-border), transparent)' }}
                   aria-hidden="true"
                 />
               )}

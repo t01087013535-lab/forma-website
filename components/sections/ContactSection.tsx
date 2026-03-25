@@ -27,14 +27,14 @@ export function ContactSection() {
           WebkitTextStroke: '1px rgba(255,255,255,0.04)',
           color: 'transparent',
           lineHeight: 1,
-          fontFamily: 'var(--font-sans)',
+          fontFamily: 'var(--font-display)',
         }}
       >
         FORMA
       </div>
 
       <div className="relative mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16">
-        <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 4, color: '#888', marginBottom: 24, fontFeatureSettings: "'ss01'" }}>
+        <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 4, color: 'var(--color-ink-subtle)', marginBottom: 24, fontFeatureSettings: "'ss01'" }}>
           CONTACT
         </p>
 
@@ -47,7 +47,7 @@ export function ContactSection() {
             fontWeight: 700,
             letterSpacing: '-0.03em',
             lineHeight: 1.1,
-            color: '#fff',
+            color: 'var(--color-ink-inverted)',
           }}
         >
           <TextReveal>당신의 비전에</TextReveal>
@@ -71,7 +71,7 @@ export function ContactSection() {
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-[13px] tracking-[1px]"
-              style={{ color: '#888' }}
+              style={{ color: 'var(--color-ink-subtle)' }}
             >
               <Mail size={16} aria-hidden="true" />
               {email}

@@ -418,3 +418,99 @@ Static pages: ✓ 4/4 생성 (155ms)
   - reduced 시 stagger 자체를 무효화 (자식들이 staggerChildren 타이밍 없이 즉시 등장)
 - `m.li variants`: `prefersReduced ? reducedFadeUp : fadeUp`
   - reduced 시 y 이동 없이 opacity만 0→1 전환 (duration 0으로 즉시)
+
+---
+
+# PM Round 4 — 색상 토큰 정리 + OG 이미지 (T1–T7)
+
+## STATUS: DONE
+
+## 빌드 결과
+```
+▲ Next.js 16.2.1 (Turbopack)
+✓ Compiled successfully in 1281ms
+Finished TypeScript in 891ms — TypeScript 오류 0개
+✓ Generating static pages (5/5)
+
+Route (app)
+/ — Static
+/_not-found — Static
+/opengraph-image — Static
+```
+
+## 변경 파일 목록
+
+| 파일 | 태스크 |
+|------|--------|
+| `app/globals.css` | T1 |
+| `app/layout.tsx` | T7 (og-image 참조 제거) |
+| `app/opengraph-image.tsx` | T7 (신규 생성) |
+| `components/layout/Footer.tsx` | T2 |
+| `components/sections/ContactSection.tsx` | T3 |
+| `components/sections/WorkSection.tsx` | T4 |
+| `components/nav/FloatingNav.tsx` | T5 |
+| `components/sections/ServiceSection.tsx` | T6 |
+| `components/ui/GlassCard.tsx` | T6 |
+| `components/sections/StorySection.tsx` | T6 |
+| `components/sections/HeroSection.tsx` | T6 |
+| `public/file.svg` | T7 (삭제) |
+| `public/next.svg` | T7 (삭제) |
+| `public/window.svg` | T7 (삭제) |
+| `public/vercel.svg` | T7 (삭제) |
+| `public/globe.svg` | T7 (삭제) |
+
+## 구현 완료 태스크
+
+### T1: globals.css
+- `html { cursor: none }` 를 `@media (hover: hover)` 블록 내부로 이동 (M7 해결 — 터치 기기 cursor 정상화)
+- 신규 CSS 토큰 5개 추가: `--color-dark-border`, `--color-dark-surface`, `--color-ink-inverted`, `--color-gold-border`, `--color-gold-glow`
+
+### T2: Footer.tsx
+- `#fff` → `var(--color-ink-inverted)` (M4)
+- `#555` (2곳) → `var(--color-ink-subtle)` (M4)
+- `#666` → `var(--color-ink-subtle)` (M4)
+- `#333` → `var(--color-dark-border)` — BLOCKER 1.7:1 대비 해결 (M4)
+
+### T3: ContactSection.tsx
+- `color: '#888'` 2곳 → `var(--color-ink-subtle)` (M2)
+- `color: '#fff'` → `var(--color-ink-inverted)` (M3)
+- 배경 FORMA 텍스트 `fontFamily: var(--font-sans)` → `var(--font-display)` (N10)
+
+### T4: WorkSection.tsx
+- Coming Soon 카드 하드코딩 색상 전체 토큰 교체 (M1)
+  - `#111`, `#141414`, `#1a1a1a` → `var(--color-dark-surface)`
+  - `#1e1e1e`, `#2a2a2a`, `#222` → `var(--color-dark-border)`
+  - `#555` → `var(--color-ink-subtle)`
+- 라이브 카드 `bg-white` → `bg-[var(--color-surface)]` (N3)
+- 레퍼런스 카드 패턴: Coming Soon 카드에 `hover:border-white/20 transition-all` 추가 (D2)
+
+### T5: FloatingNav.tsx
+- `text-[#6b6b6b]` → `text-[var(--color-ink-subtle)]` (M5)
+- `hover:bg-[#333]` → `hover:bg-[var(--color-dark-surface)]` (M5)
+- 모바일 메뉴 `text-[#666]` → `text-[var(--color-ink-subtle)]` (M5)
+- 데스크톱 CTA에 `focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:outline-none` 추가 (M6)
+- 로고 `href="#"` → `href="#hero"` (N7)
+- 기존 scrolled 상태 조건부 backdrop-blur 구조 유지 (라이트 페이지 맥락에서 적합)
+
+### T6: 잔여 토큰 교체
+- ServiceSection: `bg-white` → `bg-[var(--color-surface)]` (N1), `rgba(192,169,106,0.25)` → `var(--color-gold-dim)` (N2)
+- GlassCard: `rgba(255,255,255,0.55)` → `var(--color-glass)` (N4)
+- StorySection: 커넥터 `rgba(0,0,0,0.15)` → `var(--color-border)` (N6)
+- HeroSection: gold border/glow 하드코딩 → `var(--color-gold-border)` / `var(--color-gold-glow)` + 주석 제거 (N5)
+
+### T7: public/ 클린업 + OG 이미지
+- 미사용 SVG 5개 삭제 확인 후 제거: file.svg, next.svg, window.svg, vercel.svg, globe.svg (N8)
+- `app/opengraph-image.tsx` 생성 — Next.js 16 ImageResponse 동적 OG 이미지 (B1 해결)
+  - 1200x630, `image/png`, edge 런타임 없이 static 생성
+  - 다크 배경 (#0d0d0d), FORMA 텍스트, gold 태그라인, 기하학 장식 포함
+- `app/layout.tsx`에서 `images: ['/og-image.jpg']` 제거 (Next.js 자동 처리로 전환)
+
+## 실패 항목
+
+없음. PM 명세 BLOCKER/MAJOR/MINOR 전체 항목 완료.
+
+## 보류 항목 (PM 명세 외 / 지시 없음)
+
+- N9 (`WorkSection overflow-x-auto` 미디어 쿼리): 현재 `lg:overflow-visible overflow-x-auto`로 lg 이상에서 이미 visible 처리됨. 추가 수정 지시 없어 보류.
+- D3 (HeroSection 상태 배지 pulse dot): "추가 고려" 항목, 태스크 구현 지시 없어 보류.
+- D4 (전체 다크 섹션 배경색 `#09090b` 통일): 현재 `--color-dark-bg: #0d0d0d` 사용. 색상값 변경은 디자인 결정 필요, 태스크에 명시 없어 보류.

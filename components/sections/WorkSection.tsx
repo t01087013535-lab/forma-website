@@ -35,7 +35,7 @@ export function WorkSection() {
           {portfolioItems.map((item) => (
             <m.li key={item.index} variants={fadeUp} role="listitem">
               {item.isLive ? (
-                <TiltCard className="group relative overflow-hidden rounded-2xl bg-white border border-[rgba(0,0,0,0.07)] transition-all duration-300 hover:border-[var(--color-gold)] hover:shadow-xl">
+                <TiltCard className="group relative overflow-hidden rounded-2xl bg-[var(--color-surface)] border border-[rgba(0,0,0,0.07)] transition-all duration-300 hover:border-[var(--color-gold)] hover:shadow-xl">
                   <div className="relative aspect-[4/3] overflow-hidden bg-[var(--color-bg)]">
                     {item.thumbnail ? (
                       <Image
@@ -102,20 +102,20 @@ export function WorkSection() {
                   </div>
                 </TiltCard>
               ) : (
-                <div className="flex flex-col overflow-hidden rounded-2xl border border-[#1e1e1e] bg-[#111] h-full">
+                <div className="flex flex-col overflow-hidden rounded-2xl border border-[var(--color-dark-border)] bg-[var(--color-dark-surface)] h-full transition-all hover:border-white/20">
                   <div
                     className="relative flex flex-1 min-h-[140px] items-center justify-center"
-                    style={{ background: 'linear-gradient(135deg, #141414 0%, #1a1a1a 100%)' }}
+                    style={{ background: 'linear-gradient(135deg, var(--color-dark-surface) 0%, #111111 100%)' }}
                   >
-                    <div className="absolute top-4 right-4 w-8 h-8 rounded-full border border-[#2a2a2a]" aria-hidden="true" />
-                    <div className="absolute bottom-4 left-4 w-12 h-px bg-[#222]" aria-hidden="true" />
-                    <Lock size={18} style={{ color: '#2a2a2a' }} aria-hidden="true" />
+                    <div className="absolute top-4 right-4 w-8 h-8 rounded-full border border-[var(--color-dark-border)]" aria-hidden="true" />
+                    <div className="absolute bottom-4 left-4 w-12 h-px bg-[var(--color-dark-border)]" aria-hidden="true" />
+                    <Lock size={18} style={{ color: 'var(--color-dark-border)' }} aria-hidden="true" />
                   </div>
-                  <div className="p-4 border-t border-[#1e1e1e]">
-                    <p style={{ fontFamily: 'var(--font-mono)', fontSize: 9, letterSpacing: 3, color: '#2a2a2a', marginBottom: 4 }}>
+                  <div className="p-4 border-t border-[var(--color-dark-border)]">
+                    <p style={{ fontFamily: 'var(--font-mono)', fontSize: 9, letterSpacing: 3, color: 'var(--color-dark-border)', marginBottom: 4 }}>
                       {item.index}
                     </p>
-                    <p style={{ fontSize: 11, color: '#555' }}>Coming Soon</p>
+                    <p style={{ fontSize: 11, color: 'var(--color-ink-subtle)' }}>Coming Soon</p>
                   </div>
                 </div>
               )}

@@ -17,6 +17,11 @@
   --color-bg-alt:    #ede9e3;
   --color-ink-subtle: #777777;
   --color-gold-subtle: rgba(192, 169, 106, 0.08);
+  --color-dark-border: rgba(255, 255, 255, 0.08);
+  --color-dark-surface: #1a1a1a;
+  --color-ink-inverted: #ffffff;
+  --color-gold-border: rgba(192, 169, 106, 0.3);
+  --color-gold-glow: rgba(192, 169, 106, 0.15);
 
   --font-korean:  'Pretendard', 'Apple SD Gothic Neo', sans-serif;
   --font-display: 'Playfair Display', Georgia, serif;
@@ -30,8 +35,6 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { cursor: none; }   /* 커스텀 커서 — CustomCursor 컴포넌트에서 관리 */
-
 body {
   background-color: var(--color-bg);
   color: var(--color-ink);
@@ -40,8 +43,9 @@ body {
   overflow-x: hidden;
 }
 
-/* 커스텀 커서 숨김 (모바일 제외) */
+/* 커스텀 커서 숨김 (hover 지원 기기만 — 터치 기기 제외) */
 @media (hover: hover) {
+  html { cursor: none; }
   * { cursor: none !important; }
 }
 

@@ -54,7 +54,7 @@ export function ServiceSection() {
             <li key={title} role="listitem" className="group">
               <GlassCard className="flex h-full flex-col p-8 transition-all duration-300 group-hover:border-[var(--color-gold)]">
                 <div
-                  className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl transition-colors duration-300 group-hover:bg-[rgba(192,169,106,0.25)]"
+                  className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl transition-colors duration-300 group-hover:bg-[var(--color-gold-dim)]"
                   style={{ background: 'var(--color-gold-dim)' }}
                 >
                   <Icon size={22} style={{ color: 'var(--color-gold)' }} aria-hidden="true" />
@@ -77,7 +77,7 @@ export function ServiceSection() {
           {techTags.map(tag => (
             <span
               key={tag}
-              className="rounded-full border border-[rgba(0,0,0,0.1)] bg-white px-4 py-1.5 text-[11px] font-semibold tracking-[1px]"
+              className="rounded-full border border-[rgba(0,0,0,0.1)] bg-[var(--color-surface)] px-4 py-1.5 text-[11px] font-semibold tracking-[1px]"
               style={{ color: 'var(--color-ink-muted)' }}
             >
               {tag}

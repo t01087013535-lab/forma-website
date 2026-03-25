@@ -76,8 +76,8 @@ export function HeroSection() {
             borderRadius: 14,
             transform: 'rotate(12deg) perspective(400px) rotateX(20deg) rotateY(-10deg)',
             background: 'var(--color-gold-subtle)',
-            border: '1px solid rgba(192, 169, 106, 0.3)', /* gold border — no token */
-            boxShadow: '0 8px 24px rgba(192, 169, 106, 0.15)', /* gold shadow — no token */
+            border: '1px solid var(--color-gold-border)',
+            boxShadow: '0 8px 24px var(--color-gold-glow)',
           }}
         />
       </m.div>
