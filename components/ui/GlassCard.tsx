@@ -1,6 +1,6 @@
 'use client'
 import { m, useReducedMotion } from 'framer-motion'
-import { scaleIn, viewportConfig } from '@/lib/animations'
+import { scaleIn, reducedScaleIn, viewportConfig } from '@/lib/animations'
 
 interface GlassCardProps {
   children: React.ReactNode
@@ -26,7 +26,7 @@ export function GlassCard({ children, className = '', animate = true }: GlassCar
     <m.div
       style={style}
       className={className}
-      variants={scaleIn}
+      variants={prefersReduced ? reducedScaleIn : scaleIn}
       initial="hidden"
       whileInView="visible"
       viewport={viewportConfig}

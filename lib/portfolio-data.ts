@@ -16,7 +16,7 @@ export const portfolioItems: PortfolioItem[] = [
     nameEn:    'Sungbyuk Construction',
     url:       'https://sungbyuk.vercel.app',
     tags:      ['Next.js 16', 'Tailwind v4', 'Vercel'],
-    thumbnail: '/images/portfolio/sungbyuk.jpg',
+    thumbnail: undefined,
     isLive:    true,
   },
   { index: '02', name: 'Project 02', tags: [], isLive: false },

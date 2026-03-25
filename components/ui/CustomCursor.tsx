@@ -49,7 +49,7 @@ export function CustomCursor() {
       animate={{
         width:  hovered ? 48 : 16,
         height: hovered ? 48 : 16,
-        background: hovered ? 'rgba(255,255,255,0.9)' : '#0d0d0d',
+        background: hovered ? 'rgba(255,255,255,0.9)' : 'var(--color-ink)',
         borderRadius: '50%',
       }}
       transition={{ duration: 0.2, ease: 'easeOut' }}

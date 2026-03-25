@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://forma-website-two.vercel.app/sitemap.xml

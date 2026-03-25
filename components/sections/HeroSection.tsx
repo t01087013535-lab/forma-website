@@ -1,6 +1,6 @@
 'use client'
 import { useRef } from 'react'
-import { m, useScroll, useTransform } from 'framer-motion'
+import { m, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import { MagneticButton } from '@/components/ui/MagneticButton'
 import { GlassCard } from '@/components/ui/GlassCard'
 import { TextReveal } from '@/components/ui/TextReveal'
@@ -12,6 +12,7 @@ const stats: { value: string; label: string }[] = [
 ]
 
 export function HeroSection() {
+  const prefersReduced = useReducedMotion()
   const ref = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
 
@@ -30,7 +31,7 @@ export function HeroSection() {
       {/* 3D 기하학 오브젝트 */}
       <m.div
         className="pointer-events-none absolute -top-16 -right-16"
-        style={{ y: geo1Y, willChange: 'transform' }}
+        style={{ y: prefersReduced ? 0 : geo1Y, willChange: 'transform' }}
         aria-hidden="true"
       >
         <div
@@ -40,7 +41,7 @@ export function HeroSection() {
             borderRadius: 40,
             transform: 'rotate(18deg) perspective(800px) rotateX(18deg) rotateY(-18deg)',
             background: 'linear-gradient(135deg, rgba(255,255,255,0.95), rgba(235,230,220,0.4))',
-            border: '1px solid rgba(0,0,0,0.07)',
+            border: '1px solid var(--color-border)',
             boxShadow: '0 30px 80px rgba(0,0,0,0.06)',
           }}
         />
@@ -48,7 +49,7 @@ export function HeroSection() {
 
       <m.div
         className="pointer-events-none absolute -bottom-20 -left-16"
-        style={{ y: geo2Y, willChange: 'transform' }}
+        style={{ y: prefersReduced ? 0 : geo2Y, willChange: 'transform' }}
         aria-hidden="true"
       >
         <div
@@ -58,14 +59,14 @@ export function HeroSection() {
             borderRadius: '50%',
             transform: 'perspective(600px) rotateX(25deg) rotateY(10deg)',
             background: 'linear-gradient(135deg, rgba(255,255,255,0.7), rgba(230,225,215,0.2))',
-            border: '1px solid rgba(0,0,0,0.05)',
+            border: '1px solid var(--color-border)',
           }}
         />
       </m.div>
 
       <m.div
         className="pointer-events-none absolute"
-        style={{ top: 220, right: 160, y: geo3Y, willChange: 'transform' }}
+        style={{ top: 220, right: 160, y: prefersReduced ? 0 : geo3Y, willChange: 'transform' }}
         aria-hidden="true"
       >
         <div
@@ -74,9 +75,9 @@ export function HeroSection() {
             height: 72,
             borderRadius: 14,
             transform: 'rotate(12deg) perspective(400px) rotateX(20deg) rotateY(-10deg)',
-            background: 'rgba(192,169,106,0.08)',
-            border: '1px solid rgba(192,169,106,0.3)',
-            boxShadow: '0 8px 24px rgba(192,169,106,0.15)',
+            background: 'var(--color-gold-subtle)',
+            border: '1px solid rgba(192, 169, 106, 0.3)', /* gold border — no token */
+            boxShadow: '0 8px 24px rgba(192, 169, 106, 0.15)', /* gold shadow — no token */
           }}
         />
       </m.div>
@@ -86,9 +87,9 @@ export function HeroSection() {
         {/* 키커 */}
         <m.div
           className="mb-8 flex items-center gap-3"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          initial={prefersReduced ? { opacity: 0 } : { opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={prefersReduced ? { duration: 0.01 } : { duration: 0.6, delay: 0.2 }}
         >
           <div
             aria-hidden="true"
@@ -104,7 +105,7 @@ export function HeroSection() {
               fontFamily: 'var(--font-mono)',
               fontSize: 11,
               letterSpacing: 4,
-              color: '#666',
+              color: 'var(--color-ink-muted)',
               fontWeight: 600,
             }}
           >
@@ -137,9 +138,9 @@ export function HeroSection() {
         <m.p
           className="mb-12 max-w-[440px] text-[16px] leading-[1.7]"
           style={{ color: 'var(--color-ink-muted)', fontFamily: 'var(--font-korean)', letterSpacing: '-0.01em' }}
-          initial={{ opacity: 0, y: 16 }}
+          initial={prefersReduced ? { opacity: 0 } : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
+          transition={prefersReduced ? { duration: 0.01 } : { duration: 0.6, delay: 0.5 }}
         >
           수백 번의 실패가 쌓여 하나의 기술이 됐습니다.<br />
           그 기술로 당신의 비즈니스를 웹에 새겨드립니다.
@@ -148,9 +149,9 @@ export function HeroSection() {
         {/* 스탯 카드 */}
         <m.div
           className="mb-14 flex flex-wrap gap-3"
-          initial={{ opacity: 0, y: 16 }}
+          initial={prefersReduced ? { opacity: 0 } : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
+          transition={prefersReduced ? { duration: 0.01 } : { duration: 0.6, delay: 0.6 }}
           role="list"
           aria-label="주요 지표"
         >
@@ -175,7 +176,7 @@ export function HeroSection() {
                     fontFamily: 'var(--font-mono)',
                     fontSize: 9,
                     letterSpacing: 2,
-                    color: '#777',
+                    color: 'var(--color-ink-subtle)',
                     marginTop: 2,
                   }}
                 >
@@ -189,13 +190,13 @@ export function HeroSection() {
         {/* CTA */}
         <m.div
           className="flex flex-wrap gap-4"
-          initial={{ opacity: 0, y: 16 }}
+          initial={prefersReduced ? { opacity: 0 } : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.7 }}
+          transition={prefersReduced ? { duration: 0.01 } : { duration: 0.6, delay: 0.7 }}
         >
           <a
             href="#work"
-            className="rounded-full border border-[#0d0d0d] px-7 py-3.5 text-[13px] font-semibold tracking-[1px] text-[#0d0d0d] transition-all duration-200 hover:bg-[#0d0d0d] hover:text-white hover:scale-[0.98]"
+            className="rounded-full border border-[#0d0d0d] px-7 py-3.5 text-[13px] font-semibold tracking-[1px] text-[#0d0d0d] transition-all duration-200 hover:bg-[#0d0d0d] hover:text-white hover:scale-[0.98] focus-visible:ring-2 focus-visible:ring-[#0d0d0d] focus-visible:ring-offset-2 focus-visible:outline-none"
             style={{ minHeight: 44, display: 'inline-flex', alignItems: 'center' }}
           >
             포트폴리오 보기

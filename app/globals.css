@@ -14,6 +14,9 @@
   --color-glass:     rgba(255, 255, 255, 0.55);
   --color-border:    rgba(0, 0, 0, 0.07);
   --color-dark-bg:   #0d0d0d;
+  --color-bg-alt:    #ede9e3;
+  --color-ink-subtle: #777777;
+  --color-gold-subtle: rgba(192, 169, 106, 0.08);
 
   --font-korean:  'Pretendard', 'Apple SD Gothic Neo', sans-serif;
   --font-display: 'Playfair Display', Georgia, serif;

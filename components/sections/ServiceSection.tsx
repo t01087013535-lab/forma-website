@@ -31,7 +31,7 @@ export function ServiceSection() {
     <section id="service" className="py-[clamp(80px,12vw,160px)]" style={{ background: 'var(--color-bg)' }} aria-label="서비스">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16">
         <div className="mb-16">
-          <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 4, color: '#666', marginBottom: 16, fontFeatureSettings: "'ss01'" }}>
+          <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 4, color: 'var(--color-ink-muted)', marginBottom: 16, fontFeatureSettings: "'ss01'" }}>
             SERVICE
           </p>
           <h2 style={{ fontSize: 'var(--text-h1)', fontWeight: 900, letterSpacing: '-0.04em', lineHeight: 1.05 }}>
@@ -51,10 +51,10 @@ export function ServiceSection() {
           role="list"
         >
           {services.map(({ icon: Icon, title, desc }) => (
-            <li key={title} role="listitem">
-              <GlassCard className="flex h-full flex-col p-8">
+            <li key={title} role="listitem" className="group">
+              <GlassCard className="flex h-full flex-col p-8 transition-all duration-300 group-hover:border-[var(--color-gold)]">
                 <div
-                  className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl"
+                  className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl transition-colors duration-300 group-hover:bg-[rgba(192,169,106,0.25)]"
                   style={{ background: 'var(--color-gold-dim)' }}
                 >
                   <Icon size={22} style={{ color: 'var(--color-gold)' }} aria-hidden="true" />

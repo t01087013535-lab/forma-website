@@ -55,6 +55,7 @@ export function MagneticButton({ children, className = '', onClick, href }: Magn
     <div
       role="button"
       tabIndex={0}
+      className="focus-visible:ring-2 focus-visible:ring-[#0d0d0d] focus-visible:ring-offset-2 focus-visible:outline-none"
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault()

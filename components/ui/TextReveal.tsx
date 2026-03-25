@@ -1,6 +1,6 @@
 'use client'
-import { m } from 'framer-motion'
-import { textRevealVariant, viewportConfig } from '@/lib/animations'
+import { m, useReducedMotion } from 'framer-motion'
+import { textRevealVariant, reducedTextReveal, viewportConfig } from '@/lib/animations'
 
 interface TextRevealProps {
   children: React.ReactNode
@@ -9,17 +9,20 @@ interface TextRevealProps {
 }
 
 export function TextReveal({ children, className = '', delay = 0 }: TextRevealProps) {
+  const prefersReduced = useReducedMotion()
+  const baseVariant = prefersReduced ? reducedTextReveal : textRevealVariant
+
   return (
     <span style={{ display: 'block', overflow: 'hidden' }}>
       <m.span
         className={className}
         style={{ display: 'block' }}
         variants={{
-          ...textRevealVariant,
+          ...baseVariant,
           visible: {
-            ...textRevealVariant.visible,
+            ...baseVariant.visible,
             transition: {
-              ...(textRevealVariant.visible as { transition: object }).transition,
+              ...(baseVariant.visible as { transition: object }).transition,
               delay,
             },
           },

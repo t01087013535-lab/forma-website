@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
-import { m } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 
 const navLinks = [
   { href: '#work',    label: 'Work'    },
@@ -9,6 +9,7 @@ const navLinks = [
 ]
 
 export function FloatingNav() {
+  const prefersReduced = useReducedMotion()
   const [scrolled, setScrolled]   = useState(false)
   const [menuOpen, setMenuOpen]   = useState(false)
   const firstLinkRef              = useRef<HTMLAnchorElement>(null)
@@ -62,9 +63,9 @@ export function FloatingNav() {
   return (
     <m.header
       className="fixed top-0 left-0 right-0 z-50 px-5 sm:px-8 pt-6"
-      initial={{ y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      initial={prefersReduced ? { opacity: 0 } : { opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={prefersReduced ? { duration: 0.01 } : { duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     >
       <a
         href="#hero"

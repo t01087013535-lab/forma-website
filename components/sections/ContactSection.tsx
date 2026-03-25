@@ -6,7 +6,7 @@ import { MagneticButton } from '@/components/ui/MagneticButton'
 import { TextReveal } from '@/components/ui/TextReveal'
 
 const email    = process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? 'hello@forma.kr'
-const kakaoUrl = process.env.NEXT_PUBLIC_KAKAO_URL     ?? '#'
+const kakaoUrl = process.env.NEXT_PUBLIC_KAKAO_URL
 
 export function ContactSection() {
   return (
@@ -65,16 +65,18 @@ export function ContactSection() {
             프로젝트 시작하기 →
           </MagneticButton>
 
-          <a
-            href={kakaoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-[13px] tracking-[1px]"
-            style={{ color: '#888' }}
-          >
-            <Mail size={16} aria-hidden="true" />
-            {email}
-          </a>
+          {kakaoUrl && kakaoUrl !== '#' && (
+            <a
+              href={kakaoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-[13px] tracking-[1px]"
+              style={{ color: '#888' }}
+            >
+              <Mail size={16} aria-hidden="true" />
+              {email}
+            </a>
+          )}
         </div>
       </div>
     </section>
