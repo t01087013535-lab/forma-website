@@ -1,23 +1,51 @@
 'use client'
-// components/sections/StorySection.tsx
 import { m, useReducedMotion } from 'framer-motion'
-import { Flame, ClipboardList, Settings, Wrench, Sparkles } from 'lucide-react'
-import type { LucideIcon } from 'lucide-react'
-import { stagger, fadeUp, viewportConfig, reducedFadeUp } from '@/lib/animations'
+import { viewportConfig } from '@/lib/animations'
 
-interface Step {
-  icon: LucideIcon
-  title: string
-  desc: string
-  isLast?: boolean
-}
+const stats = [
+  { value: '15+',  label: 'PROJECTS', ariaLabel: '15개 이상의 프로젝트' },
+  { value: '3',    label: 'SERVICES', ariaLabel: '3가지 핵심 서비스' },
+  { value: '100%', label: 'IN-HOUSE', ariaLabel: '100% 직접 개발' },
+  { value: '2024', label: 'EST.',     ariaLabel: '2024년 설립' },
+]
 
-const steps: Step[] = [
-  { icon: Flame,         title: '첫 프로젝트',  desc: '무수한 오류와\n마주침'           },
-  { icon: ClipboardList, title: '오류 기록',    desc: '실패를 체계적으로\n정리'          },
-  { icon: Settings,      title: '패턴 발견',    desc: '반복 문제 →\n해결 공식화'         },
-  { icon: Wrench,        title: '스킬화',       desc: '해결책을\n재사용 도구로'          },
-  { icon: Sparkles,      title: 'FORMA',        desc: '완전한 개발\n플랫폼 완성', isLast: true },
+const steps = [
+  {
+    number: '01',
+    title: '첫 프로젝트',
+    titleEn: 'First Project',
+    tag: 'ORIGIN',
+    desc: '아무것도 없이 시작했습니다.\n모든 오류가 우리의 재료였습니다.',
+  },
+  {
+    number: '02',
+    title: '오류 기록',
+    titleEn: 'Error Analysis',
+    tag: 'ANALYSIS',
+    desc: '실패를 체계화했습니다.\n아무도 기록하지 않는 방식으로.',
+  },
+  {
+    number: '03',
+    title: '패턴 발견',
+    titleEn: 'Pattern Recognition',
+    tag: 'RESEARCH',
+    desc: '반복 뒤에는 공식이 있었습니다.\n우리는 그것을 찾아냈습니다.',
+  },
+  {
+    number: '04',
+    title: '스킬화',
+    titleEn: 'Systemization',
+    tag: 'BUILD',
+    desc: '해결책을 도구로 만들었습니다.\n지식이 쌓이고 속도가 붙었습니다.',
+  },
+  {
+    number: '05',
+    title: 'FORMA',
+    titleEn: 'The Platform',
+    tag: 'PLATFORM',
+    desc: '완전한 플랫폼의 완성.\n당신의 비전에 형태를 부여합니다.',
+    isLast: true,
+  },
 ]
 
 export function StorySection() {
@@ -26,88 +54,228 @@ export function StorySection() {
   return (
     <section
       id="story"
-      className="py-[clamp(80px,12vw,160px)]"
-      style={{ background: '#0a0a0a' }}
+      style={{ background: 'transparent' }}
       aria-label="우리의 서사"
     >
-      <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16">
-        <div className="mb-20">
-          <p
-            className="font-mono text-[11px] tracking-[4px] text-zinc-600 mb-4"
-            style={{ fontFeatureSettings: "'ss01'" }}
+      {/* 대형 헤드라인 */}
+      <div className="px-6 md:px-16 pt-24 pb-20">
+        <m.p
+          className="font-mono text-[10px] tracking-[5px] mb-10"
+          style={{ color: 'rgba(26,28,25,0.20)' }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={viewportConfig}
+          transition={prefersReduced ? { duration: 0.01 } : { duration: 0.5 }}
+        >
+          STORY — FORMA STUDIO
+        </m.p>
+
+        <m.h2
+          style={{
+            fontFamily: 'var(--font-newsreader)',
+            fontStyle: 'italic',
+            fontSize: 'clamp(80px, 15vw, 220px)',
+            fontWeight: 300,
+            lineHeight: 0.86,
+            letterSpacing: '-0.04em',
+            color: '#1a1c19',
+          }}
+          initial={prefersReduced ? { opacity: 0 } : { opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={viewportConfig}
+          transition={prefersReduced ? { duration: 0.01 } : { duration: 1, ease: [0.16, 1, 0.3, 1] }}
+        >
+          OUR<br />
+          STORY
+        </m.h2>
+      </div>
+
+      {/* 인트로 + 크리드 */}
+      <div className="px-6 md:px-16 pt-4 pb-20 grid md:grid-cols-2 gap-10 md:gap-20 items-center">
+        <m.p
+          className="text-[15px] max-w-lg"
+          style={{ color: 'rgba(26,28,25,0.38)', lineHeight: 1.9 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={viewportConfig}
+          transition={prefersReduced ? { duration: 0.01 } : { duration: 0.6, delay: 0.1 }}
+        >
+          실패의 기록이 방법론이 됐습니다.
+          반복된 오류가 정밀함을 만들었습니다.
+        </m.p>
+
+        <m.div
+          className="flex items-center gap-6"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={viewportConfig}
+          transition={prefersReduced ? { duration: 0.01 } : { duration: 0.6, delay: 0.2 }}
+        >
+          <span
+            className="font-mono text-[9px] tracking-[3px] whitespace-nowrap shrink-0"
+            style={{ color: 'rgba(26,28,25,0.20)' }}
           >
-            STORY
-          </p>
-          <m.h2
-            className="text-[clamp(36px,5.5vw,64px)] font-light tracking-tight leading-[1.05] text-[#ededed]"
-            style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}
-            initial={prefersReduced ? { opacity: 0 } : { opacity: 0, y: 20 }}
+            The Forma Creed
+          </span>
+          <div
+            className="flex-1 h-px"
+            style={{ background: 'rgba(26,28,25,0.08)' }}
+            aria-hidden="true"
+          />
+        </m.div>
+      </div>
+
+      {/* Stats */}
+      <div
+        className="grid grid-cols-2 md:grid-cols-4"
+        style={{ background: '#f0ede7', borderTop: '1px solid rgba(26,28,25,0.06)', borderBottom: '1px solid rgba(26,28,25,0.06)' }}
+      >
+        {stats.map((stat, i) => (
+          <m.div
+            key={stat.label}
+            className="py-14 px-8 md:px-10 flex flex-col"
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={viewportConfig}
-            transition={prefersReduced ? { duration: 0.01 } : { duration: 0.6 }}
+            transition={prefersReduced ? { duration: 0.01 } : { duration: 0.6, delay: i * 0.06 }}
           >
-            모든 오류가<br />우리의 교과서였다
-          </m.h2>
-          <m.p
-            className="mt-6 max-w-[480px] text-[16px] leading-[1.7] text-zinc-400"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={viewportConfig}
-            transition={prefersReduced ? { duration: 0.01 } : { duration: 0.6, delay: 0.3 }}
-          >
-            프로젝트마다 쌓아온 수백 번의 실패를 기록하고 체계화했습니다.
-            그 과정이 쌓여 하나의 완성된 개발 플랫폼이 됐습니다.
-          </m.p>
-        </div>
-
-        <m.ol
-          className="flex flex-col gap-6 lg:flex-row lg:gap-0"
-          variants={prefersReduced ? { hidden: {}, visible: {} } : stagger(0.1)}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportConfig}
-        >
-          {steps.map((step, i) => (
-            <m.li
-              key={step.title}
-              className="relative flex flex-1 flex-col"
-              variants={prefersReduced ? reducedFadeUp : fadeUp}
+            <span
+              aria-label={stat.ariaLabel}
+              style={{
+                fontFamily: 'var(--font-newsreader)',
+                fontStyle: 'italic',
+                fontSize: 'clamp(40px, 6vw, 80px)',
+                fontWeight: 300,
+                letterSpacing: '-0.03em',
+                lineHeight: 1,
+                color: '#675e3f',
+              }}
             >
-              {i < steps.length - 1 && (
-                <div
-                  className="absolute top-[calc(1.5rem+20px)] left-[calc(50%+32px)] right-0 hidden h-px lg:block"
-                  style={{ background: 'linear-gradient(90deg, rgba(255,255,255,0.08), transparent)' }}
-                  aria-hidden="true"
-                />
-              )}
-              <div className="bg-zinc-900/40 border border-white/5 rounded-2xl p-6 mx-0 md:mx-2 lg:mx-3 transition-shadow duration-200 hover:border-white/10">
-                <div
-                  className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl"
-                  style={{ background: step.isLast ? 'rgba(192,169,106,0.15)' : 'rgba(255,255,255,0.05)' }}
-                  aria-hidden="true"
-                >
-                  <step.icon
-                    size={20}
-                    style={{ color: step.isLast ? 'var(--color-gold)' : 'rgba(255,255,255,0.3)' }}
-                  />
-                </div>
-                <p className="font-mono text-[9px] tracking-[3px] text-zinc-600 mb-1.5">
-                  0{i + 1}
-                </p>
-                <h3
-                  className="mb-2 text-[15px] font-bold"
-                  style={{ color: step.isLast ? 'var(--color-gold)' : '#ededed' }}
-                >
-                  {step.title}
-                </h3>
-                <p className="whitespace-pre-line text-[13px] leading-[1.6] text-zinc-500">
-                  {step.desc}
-                </p>
-              </div>
-            </m.li>
-          ))}
-        </m.ol>
+              {stat.value}
+            </span>
+            <span
+              className="font-mono text-[10px] tracking-[4px] mt-2"
+              style={{ color: 'rgba(26,28,25,0.28)' }}
+            >
+              {stat.label}
+            </span>
+          </m.div>
+        ))}
       </div>
+
+      {/* 스텝 패널 (교차 분할) */}
+      <ol>
+        {steps.map((step, i) => {
+          const isReverse = i % 2 === 1
+          const panelBg   = i % 2 === 0 ? '#f0ede7' : '#f8f6f1'
+
+          return (
+            <li key={step.number}>
+              <div
+                className={
+                  isReverse
+                    ? 'flex flex-col md:flex-row-reverse items-stretch md:min-h-screen'
+                    : 'flex flex-col md:flex-row items-stretch md:min-h-screen'
+                }
+              >
+                {/* 이미지 placeholder 하프 */}
+                <div
+                  className="w-full md:w-1/2 relative overflow-hidden"
+                  style={{
+                    minHeight: 'clamp(280px, 55vw, 100vh)',
+                    background: '#ece9e3',
+                    border: '1px solid rgba(26,28,25,0.08)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                  aria-hidden="true"
+                >
+                  <span
+                    style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '9px',
+                      letterSpacing: '0.4em',
+                      color: 'rgba(26,28,25,0.25)',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    PORTFOLIO COMING SOON
+                  </span>
+                </div>
+
+                {/* 콘텐츠 하프 */}
+                <m.div
+                  className="w-full md:w-1/2 flex flex-col justify-center relative overflow-hidden"
+                  style={{
+                    padding: 'clamp(48px, 8vw, 96px) clamp(32px, 5vw, 80px)',
+                    background: panelBg,
+                  }}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ ...viewportConfig, margin: '-10%' }}
+                  transition={prefersReduced ? { duration: 0.01 } : { duration: 0.9, delay: 0.05 }}
+                >
+                  {/* 배경 대형 숫자 */}
+                  <span
+                    aria-hidden="true"
+                    style={{
+                      position: 'absolute',
+                      top: '-0.05em',
+                      left: '-0.02em',
+                      fontFamily: 'var(--font-newsreader)',
+                      fontStyle: 'italic',
+                      fontSize: 'clamp(8rem, 20vw, 20rem)',
+                      lineHeight: 0.9,
+                      WebkitTextStroke: '1px rgba(26,28,25,0.05)',
+                      color: 'transparent',
+                      userSelect: 'none',
+                      pointerEvents: 'none',
+                    }}
+                  >
+                    {step.number}
+                  </span>
+
+                  {/* 텍스트 콘텐츠 */}
+                  <div style={{ position: 'relative', zIndex: 1 }}>
+                    <p
+                      className="font-mono text-[9px] tracking-[4px] mb-8"
+                      style={{ color: 'rgba(26,28,25,0.25)' }}
+                    >
+                      {step.tag}&ensp;—&ensp;{step.titleEn.toUpperCase()}
+                    </p>
+
+                    <h3
+                      style={{
+                        fontFamily: 'var(--font-newsreader)',
+                        fontStyle: 'italic',
+                        fontSize: 'clamp(36px, 4.5vw, 72px)',
+                        fontWeight: 300,
+                        letterSpacing: '-0.025em',
+                        lineHeight: 1.05,
+                        color: '#675e3f',
+                      }}
+                    >
+                      {step.title}
+                    </h3>
+
+                    <p
+                      className="mt-6 text-[14px] max-w-xs"
+                      style={{
+                        color: 'rgba(26,28,25,0.38)',
+                        lineHeight: 1.9,
+                        whiteSpace: 'pre-line',
+                      }}
+                    >
+                      {step.desc}
+                    </p>
+                  </div>
+                </m.div>
+              </div>
+            </li>
+          )
+        })}
+      </ol>
     </section>
   )
 }

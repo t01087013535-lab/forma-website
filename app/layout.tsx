@@ -3,6 +3,7 @@ import { Playfair_Display } from 'next/font/google'
 import { LazyMotion, domAnimation } from 'framer-motion'
 import { LenisProvider } from '@/components/layout/LenisProvider'
 import { CustomCursor } from '@/components/ui/CustomCursor'
+import { VideoBackground } from '@/components/ui/VideoBackground'
 import { PreloadResources } from '@/components/layout/PreloadResources'
 import '@/app/globals.css'
 
@@ -42,9 +43,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ko" className={playfair.variable}>
       <body>
+        <div className="grain-overlay" aria-hidden="true" />
         <PreloadResources />
         <LazyMotion features={domAnimation}>
           <LenisProvider>
+            <VideoBackground />
             <CustomCursor />
             {children}
           </LenisProvider>

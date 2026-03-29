@@ -1,66 +1,90 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&family=Nanum+Myeongjo:wght@400;700;800&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=Noto+Serif+KR:wght@200;300;400;700;900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@theme {
+  --color-ink:          #1a1c19;
+  --color-paper:        #f8f6f1;
+  --color-paper-alt:    #f0ede7;
+  --color-accent:       #675e3f;
+  --color-secondary:    #675e3f;
+  --color-muted:        #888888;
+  --color-surface-low:  #ece9e3;
+  --color-surface-high: #f8f6f1;
+  --font-serif:         'Newsreader', 'Cormorant Garamond', Georgia, serif;
+  --font-mono:          'SF Mono', 'Fira Code', monospace;
+}
+
 :root {
-  --color-bg:        #f7f5f2;
-  --color-surface:   #ffffff;
-  --color-ink:       #ededed;
-  --color-ink-muted: #a1a1a1;
-  --color-gold:      #c0a96a;
-  --color-gold-dim:  rgba(192, 169, 106, 0.15);
-  --color-glass:     rgba(255, 255, 255, 0.55);
-  --color-border:    rgba(0, 0, 0, 0.07);
-  --color-dark-bg:   #050505;
-  --color-bg-alt:    #ede9e3;
-  --color-ink-subtle: #777777;
-  --color-gold-subtle: rgba(192, 169, 106, 0.08);
-  --color-dark-border: rgba(255, 255, 255, 0.08);
-  --color-dark-surface: #1a1a1a;
-  --color-ink-inverted: #ffffff;
-  --color-gold-border: rgba(192, 169, 106, 0.3);
-  --color-gold-glow: rgba(192, 169, 106, 0.15);
+  /* ── Light luxury theme ── */
+  --color-paper:        #f8f6f1;
+  --color-paper-alt:    #f0ede7;
+  --color-ink:          #1a1c19;
+  --color-ink-light:    #1a1c19;          /* 전경 텍스트 */
+  --color-accent:       #675e3f;
+  --color-secondary:    #675e3f;
+  --color-gold:         #675e3f;
+  --color-muted:        #888888;
+  --color-border:       rgba(26, 28, 25, 0.10);
+  --color-surface-low:  #edeae4;
+  --color-surface-mid:  #e8e5df;
+  --color-surface-high: #f8f6f1;
+  --color-surface-card: #f0ede7;
 
-  /* Stitch 디자인 시스템 토큰 */
-  --color-blue:      #137fec;
-  --color-blue-dim:  rgba(19, 127, 236, 0.12);
-  --color-blue-glow: rgba(19, 127, 236, 0.25);
+  /* Dark section (Contact) — 유지 */
+  --color-dark-bg:   #1a1c19;
+  --color-dark-text: #f0f0eb;
 
-  --font-korean:  'Pretendard', 'Apple SD Gothic Neo', sans-serif;
-  --font-display: 'Cormorant Garamond', Georgia, serif;
-  --font-sans:    'Inter', 'Pretendard', -apple-system, sans-serif;
-  --font-mono:    'SF Mono', 'Fira Code', monospace;
+  /* Legacy */
+  --color-cyan:      #00dbe9;
 
-  --text-display: clamp(56px, 9vw, 112px);
-  --text-h1:      clamp(36px, 5.5vw, 64px);
-  --text-h2:      clamp(26px, 3.5vw, 44px);
+  --font-display:       'Newsreader', 'Cormorant Garamond', Georgia, serif;
+  --font-newsreader:    'Newsreader', 'Cormorant Garamond', Georgia, serif;
+  --font-korean-serif:  'Nanum Myeongjo', Georgia, serif;
+  --font-noto-serif-kr: 'Noto Serif KR', Georgia, serif;
+  --font-sans:          'Inter', 'Pretendard', -apple-system, sans-serif;
+  --font-korean:        'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  --font-mono:          'SF Mono', 'Fira Code', monospace;
+
+  --text-display: clamp(56px, 9vw, 128px);
+  --text-h1:      clamp(40px, 6vw, 80px);
+  --text-h2:      clamp(28px, 4vw, 52px);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background-color: var(--color-dark-bg);
+  background-color: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  cursor: none;
 }
 
-/* 한국어 텍스트 Pretendard 폴백 */
+/* ── Custom scrollbar ── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--color-paper); }
+::-webkit-scrollbar-thumb { background: rgba(26,28,25,0.18); }
+::-webkit-scrollbar-thumb:hover { background: rgba(26,28,25,0.35); }
+
+::selection {
+  background: #1a1c19;
+  color: #f8f6f1;
+}
+
 :lang(ko) {
   font-family: var(--font-korean);
 }
 
-/* 커스텀 커서 숨김 (hover 지원 기기만 — 터치 기기 제외) */
-@media (hover: hover) {
-  html { cursor: none; }
-  * { cursor: none !important; }
-}
-
-/* prefers-reduced-motion */
+/* ── prefers-reduced-motion ── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -68,11 +92,84 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  /* CustomCursor DOM이 제거되어도 cursor:none CSS가 남으므로 커서 원복 */
-  * {
-    cursor: auto !important;
-  }
-  body {
-    cursor: auto !important;
-  }
+  body { cursor: auto; }
+}
+
+/* ── Grain texture overlay ── */
+.grain-overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 192px 192px;
+}
+
+/* ── Text glow (luxury light mode) ── */
+.text-glow {
+  text-shadow: 0 0 40px rgba(26,28,25,0.08), 0 0 80px rgba(26,28,25,0.04);
+}
+.text-glow-gold {
+  text-shadow: 0 0 40px rgba(103,94,63,0.30), 0 0 80px rgba(103,94,63,0.15);
+}
+
+/* ── Marquee ── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: flex;
+  animation: marquee 28s linear infinite;
+  will-change: transform;
+}
+.marquee-track:hover { animation-play-state: paused; }
+
+/* ── Scroll pulse ── */
+@keyframes scroll-pulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(1); }
+  50%       { opacity: 1;   transform: scaleY(0.6); }
+}
+
+/* ── Float ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+.animate-float { animation: float 4s ease-in-out infinite; }
+
+/* ── Clip-path reveal ── */
+.clip-reveal {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.clip-reveal.visible {
+  clip-path: inset(0 0% 0 0);
+}
+
+/* ── Split text overflow container ── */
+.split-overflow {
+  overflow: hidden;
+}
+
+/* ── Image hover reveal ── */
+.img-grayscale {
+  filter: grayscale(1) brightness(0.75);
+  transition: filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.img-grayscale:hover {
+  filter: grayscale(0) brightness(1);
+}
+
+/* ── Section border-top tonal ── */
+.section-divider {
+  border-top: 1px solid rgba(26,28,25,0.08);
+}
+
+/* ── Focus visible global ── */
+:focus-visible {
+  outline: 1.5px solid rgba(26,28,25,0.40);
+  outline-offset: 3px;
 }

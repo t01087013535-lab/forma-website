@@ -1,181 +1,176 @@
 'use client'
-// components/sections/WorkSection.tsx
 import { m, useReducedMotion } from 'framer-motion'
-import { ExternalLink, Lock } from 'lucide-react'
 import { portfolioItems } from '@/lib/portfolio-data'
-import { viewportConfig } from '@/lib/animations'
+
+const PROJECT_LOCATIONS = [
+  'Seoul, KR',
+  'Digital',
+  'Seoul, KR',
+  'Digital',
+]
+
+// 벤토 그리드: col-8 16/9 | col-4 3/4 | col-4 square | col-8 16/9
+const GRID_CONFIG = [
+  { colClass: 'md:col-span-8', aspectClass: 'aspect-[16/9]' },
+  { colClass: 'md:col-span-4', aspectClass: 'aspect-[3/4]'  },
+  { colClass: 'md:col-span-4', aspectClass: 'aspect-square' },
+  { colClass: 'md:col-span-8', aspectClass: 'aspect-[16/9]' },
+]
 
 export function WorkSection() {
   const prefersReduced = useReducedMotion()
-  const projects = portfolioItems
-
-  // 그리드 슬롯별 프로젝트 인덱스
-  const main    = projects[0]
-  const side    = projects[1]
-  const bottomL = projects[2]
-  const bottomR = projects[3]
-
-  const cardBase =
-    'bg-zinc-900/40 border border-white/5 rounded-[32px] p-10 hover:border-white/20 transition-all overflow-hidden relative'
+  const items = portfolioItems.slice(0, 4)
 
   return (
     <section
       id="work"
-      className="py-[clamp(80px,12vw,160px)]"
-      style={{ background: 'var(--color-dark-bg)' }}
+      className="py-32 px-6 md:px-16"
+      style={{ background: 'transparent' }}
       aria-label="포트폴리오"
     >
-      <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16">
+      <div className="max-w-[1600px] mx-auto">
 
-        {/* 섹션 헤더 */}
-        <div className="mb-16 flex items-end justify-between border-b border-white/10 pb-8">
-          <h2
-            className="text-4xl font-light tracking-tight text-[#ededed]"
-            style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}
+        {/* 헤더 */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-10 mb-24">
+          <m.h2
+            style={{
+              fontFamily: 'var(--font-newsreader)',
+              fontStyle: 'italic',
+              fontSize: 'clamp(64px, 11vw, 160px)',
+              fontWeight: 300,
+              lineHeight: 0.88,
+              letterSpacing: '-0.04em',
+              color: '#1a1c19',
+            }}
+            initial={prefersReduced ? { opacity: 0 } : { opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={prefersReduced ? { duration: 0.01 } : { duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
-            Selected Work
-          </h2>
-          <p className="text-zinc-500 font-mono text-sm">
-            / {projects.length.toString().padStart(2, '0')} PROJECTS
-          </p>
+            Selected<br />
+            <em style={{ color: '#675e3f' }}>Creations.</em>
+          </m.h2>
+
+          <m.p
+            className="text-[14px] max-w-[280px] md:text-right"
+            style={{ color: 'rgba(26,28,25,0.32)', lineHeight: 1.85 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={prefersReduced ? { duration: 0.01 } : { duration: 0.6, delay: 0.15 }}
+          >
+            형태는 목적을 담습니다.<br />다섯 개의 구조물.
+          </m.p>
         </div>
 
-        {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+        {/* 벤토 그리드 */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-3">
+          {items.map((project, i) => {
+            const { colClass, aspectClass } = GRID_CONFIG[i]
+            const location = PROJECT_LOCATIONS[i % PROJECT_LOCATIONS.length]
 
-          {/* 메인 카드 — col-span-8 */}
-          {main && (
-            <m.div
-              className={`md:col-span-8 h-[500px] ${cardBase} group cursor-pointer`}
-              whileHover={{ y: prefersReduced ? 0 : -10 }}
-              transition={prefersReduced ? { duration: 0.01 } : { duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              initial={prefersReduced ? { opacity: 0 } : { opacity: 0, y: 20 }}
-              whileInView={prefersReduced ? { opacity: 1 } : { opacity: 1, y: 0 }}
-              viewport={viewportConfig}
-            >
-              {/* hover gradient overlay — Stitch blue */}
-              <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity rounded-[32px]"
-                style={{ background: 'linear-gradient(135deg, var(--color-blue-dim), transparent)' }}
-                aria-hidden="true"
-              />
-
-              <div className="relative h-full flex flex-col justify-between">
-                <div className="flex items-start justify-between">
-                  <div>
+            return (
+              <m.article
+                key={project.index}
+                className={`group cursor-pointer ${colClass}`}
+                initial={prefersReduced ? { opacity: 0 } : { opacity: 0, y: 40 }}
+                whileInView={prefersReduced ? { opacity: 1 } : { opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-80px' }}
+                transition={prefersReduced ? { duration: 0.01 } : { duration: 0.9, delay: (i % 2) * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              >
+                {/* 이미지 컨테이너 */}
+                <div
+                  className={`relative overflow-hidden ${aspectClass}`}
+                  style={{
+                    background: '#ece9e3',
+                    border: '1px solid rgba(26,28,25,0.08)',
+                  }}
+                >
+                  {/* 이미지 placeholder */}
+                  <div
+                    className="absolute inset-0 flex items-center justify-center"
+                    aria-hidden="true"
+                  >
                     <span
-                      className="inline-block border px-3 py-1 rounded-full text-[11px] font-mono tracking-widest mb-4"
-                      style={{ borderColor: 'var(--color-blue-glow)', background: 'var(--color-blue-dim)', color: 'var(--color-blue)' }}
+                      style={{
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '9px',
+                        letterSpacing: '0.4em',
+                        color: 'rgba(26,28,25,0.25)',
+                        textTransform: 'uppercase',
+                      }}
                     >
-                      LIVE
+                      PORTFOLIO COMING SOON
                     </span>
-                    <h3 className="text-2xl font-bold text-[#ededed] mb-2">{main.name}</h3>
-                    {main.nameEn && (
-                      <p className="text-zinc-500 text-sm font-mono">{main.nameEn}</p>
-                    )}
                   </div>
-                  {main.url && (
+
+                  {/* 호버 오버레이 */}
+                  <div
+                    className="absolute inset-0 transition-opacity duration-700 opacity-0 group-hover:opacity-100"
+                    style={{ background: 'linear-gradient(to top, rgba(26,28,25,0.12) 0%, rgba(26,28,25,0.04) 55%, transparent 100%)' }}
+                    aria-hidden="true"
+                  />
+
+                  {/* 호버 텍스트 — 이미지 안 하단 */}
+                  <div
+                    className="absolute bottom-0 left-0 right-0 p-6 translate-y-3 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700"
+                    style={{ transitionTimingFunction: 'cubic-bezier(0.16,1,0.3,1)' }}
+                  >
+                    <p
+                      className="font-mono text-[9px] tracking-[3px] mb-2"
+                      style={{ color: 'rgba(26,28,25,0.45)' }}
+                    >
+                      {project.index} — {location}
+                    </p>
+                    <h3
+                      style={{
+                        fontFamily: 'var(--font-newsreader)',
+                        fontStyle: 'italic',
+                        fontSize: 'clamp(18px, 2vw, 28px)',
+                        fontWeight: 300,
+                        letterSpacing: '-0.02em',
+                        lineHeight: 1.1,
+                        color: '#1a1c19',
+                      }}
+                    >
+                      {project.nameEn ?? project.name}
+                    </h3>
+                  </div>
+
+                  {/* 인덱스 배지 — 평상시 */}
+                  <div
+                    className="absolute top-4 left-4 group-hover:opacity-0 transition-opacity duration-300"
+                    aria-hidden="true"
+                  >
+                    <span
+                      className="font-mono text-[9px] tracking-[3px]"
+                      style={{ color: 'rgba(26,28,25,0.28)' }}
+                    >
+                      {project.index}
+                    </span>
+                  </div>
+
+                  {/* LIVE 뱃지 */}
+                  {project.isLive && project.url && (
                     <a
-                      href={main.url}
+                      href={project.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label={`${main.name} 사이트 방문`}
-                      className="p-2 rounded-full border border-white/10 hover:border-white/30 transition-colors"
+                      aria-label={`${project.name} — 라이브 사이트 보기`}
+                      className="absolute top-4 right-4 font-mono text-[8px] tracking-[2px] uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ink/40"
+                      style={{
+                        color: 'rgba(26,28,25,0.65)',
+                        borderBottom: '1px solid rgba(26,28,25,0.25)',
+                        paddingBottom: '1px',
+                      }}
                     >
-                      <ExternalLink size={16} className="text-zinc-400" aria-hidden="true" />
+                      Live ↗
                     </a>
                   )}
                 </div>
-
-                <div className="flex flex-wrap gap-2" aria-label="사용 기술">
-                  {main.tags.map(tag => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 rounded-full bg-white/5 text-[10px] border border-white/10 font-mono text-zinc-400"
-                    >
-                      {tag.toUpperCase()}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </m.div>
-          )}
-
-          {/* 사이드 카드 — col-span-4 */}
-          {side && (
-            <m.div
-              className={`md:col-span-4 h-[500px] ${cardBase} flex flex-col justify-between`}
-              whileHover={{ y: prefersReduced ? 0 : -10 }}
-              transition={prefersReduced ? { duration: 0.01 } : { duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              initial={prefersReduced ? { opacity: 0 } : { opacity: 0, y: 20 }}
-              whileInView={prefersReduced ? { opacity: 1 } : { opacity: 1, y: 0 }}
-              viewport={viewportConfig}
-            >
-              <div className="flex items-center justify-center flex-1">
-                <Lock size={32} className="text-white/10" aria-hidden="true" />
-              </div>
-              <div className="border-t border-white/5 pt-6">
-                <p className="font-mono text-[10px] tracking-[3px] text-zinc-600 mb-1">
-                  {side.index}
-                </p>
-                <p className="text-zinc-500 text-sm">Coming Soon</p>
-              </div>
-            </m.div>
-          )}
-
-          {/* 하단 좌측 — col-span-6 */}
-          {bottomL && (
-            <m.div
-              className={`md:col-span-6 h-[400px] ${cardBase} flex flex-col justify-between`}
-              whileHover={{ y: prefersReduced ? 0 : -10 }}
-              transition={prefersReduced ? { duration: 0.01 } : { duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              initial={prefersReduced ? { opacity: 0 } : { opacity: 0, y: 20 }}
-              whileInView={prefersReduced ? { opacity: 1 } : { opacity: 1, y: 0 }}
-              viewport={viewportConfig}
-            >
-              <div className="flex items-center justify-center flex-1">
-                <Lock size={28} className="text-white/10" aria-hidden="true" />
-              </div>
-              <div className="border-t border-white/5 pt-6">
-                <p className="font-mono text-[10px] tracking-[3px] text-zinc-600 mb-1">
-                  {bottomL.index}
-                </p>
-                <p className="text-zinc-500 text-sm">Coming Soon</p>
-              </div>
-            </m.div>
-          )}
-
-          {/* 하단 우측 — col-span-6 (기술 태그) */}
-          {bottomR && (
-            <m.div
-              className={`md:col-span-6 h-[400px] ${cardBase} flex flex-col justify-between`}
-              whileHover={{ y: prefersReduced ? 0 : -10 }}
-              transition={prefersReduced ? { duration: 0.01 } : { duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              initial={prefersReduced ? { opacity: 0 } : { opacity: 0, y: 20 }}
-              whileInView={prefersReduced ? { opacity: 1 } : { opacity: 1, y: 0 }}
-              viewport={viewportConfig}
-            >
-              <div className="flex-1 flex items-center justify-center">
-                <div className="flex flex-wrap gap-2 justify-center max-w-[300px]" aria-label="보유 기술 스택">
-                  {['NEXT.JS', 'TYPESCRIPT', 'REACT 19', 'TAILWIND V4', 'SUPABASE', 'FASTAPI', 'VERCEL'].map(tech => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 rounded-full bg-white/5 text-[10px] border border-white/10 font-mono text-zinc-400"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <div className="border-t border-white/5 pt-6">
-                <p className="font-mono text-[10px] tracking-[3px] text-zinc-600 mb-1">
-                  {bottomR.index}
-                </p>
-                <p className="text-zinc-500 text-sm">Coming Soon</p>
-              </div>
-            </m.div>
-          )}
-
+              </m.article>
+            )
+          })}
         </div>
       </div>
     </section>

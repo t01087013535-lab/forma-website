@@ -1,12 +1,28 @@
-# FORMA 웹사이트 디자인 리빌딩 완료
+# FORMA 웹사이트 디자인 리빌딩 완료 (2차 리디자인)
 
 ## STATUS: DONE
-**작업일:** 2026-03-25
-**빌드:** TypeScript 0 오류, Next.js 16.2.1 static build 성공
+**작업일:** 2026-03-26
+**빌드:** TypeScript 0 오류, Next.js 16.2.1 static build 성공 (Compiled successfully)
 
 ---
 
-## 완료 태스크
+## 2차 리디자인 완료 (The Monolith Editorial)
+
+변경 파일: globals.css, FloatingNav.tsx, HeroSection.tsx, WorkSection.tsx, StorySection.tsx, ServiceSection.tsx, ContactSection.tsx, Footer.tsx
+
+핵심 변경:
+- 색상 변수: #1a1c19 (ink), #fafaf5 (paper), #675e3f (accent/bronze-gold), 블루 변수 제거
+- No-Line Rule: 모든 borderBottom 분리선 제거, tonal shift + py 여백으로 구역 구분
+- 라운드 코너 완전 제거: rounded-[3rem], rounded-full 버튼 → 0px radius
+- Newsreader italic 헤드라인 일관성 적용
+- FloatingNav: TaedongLogo 제거, FORMA 텍스트 로고, LET'S TALK 버튼
+- HeroSection: min-h-screen justify-end, 12-col grid, 텍스트 링크 CTA
+- WorkSection: 비대칭 Stitch 그리드, 이미지 아래 텍스트 라벨
+- ::selection { background: #000; color: #fff } 추가
+
+---
+
+## 완료 태스크 (이전)
 
 | 태스크 | 파일 | 주요 변경 |
 |--------|------|----------|
