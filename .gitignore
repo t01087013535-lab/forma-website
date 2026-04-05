@@ -45,3 +45,6 @@ next-env.d.ts
 # ide
 .cursor/
 .idea/
+
+# team analysis reports (internal, not for version control)
+taedong2-team-analysis-report.md
