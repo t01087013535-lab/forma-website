@@ -1,9 +1,11 @@
 # PM 산출물 — FORMA Round 4
 
 ## BLOCKER
+
 - B1: `app/layout.tsx:29` — `og-image.jpg` 참조하나 `public/og-image.jpg` 없음. SNS OG 이미지 깨짐
 
 ## MAJOR
+
 - M1: `WorkSection.tsx:105–118` — Coming Soon 카드: `#1e1e1e`, `#111`, `#141414`, `#1a1a1a`, `#2a2a2a`, `#222`, `#555` 하드코딩
 - M2: `ContactSection.tsx:37,74` — `#888` 두 곳. `#0d0d0d` 배경 대비 3.9:1 → WCAG AA 미달
 - M3: `ContactSection.tsx:50` — 헤딩 `#fff` 하드코딩
@@ -13,6 +15,7 @@
 - M7: `globals.css:33–34` — `html { cursor: none }` 미디어 쿼리 밖 → 터치 기기 커서 숨김
 
 ## MINOR
+
 - N1: `ServiceSection.tsx:80` — `bg-white` 하드코딩
 - N2: `ServiceSection.tsx:57` — `rgba(192,169,106,0.25)` 하드코딩
 - N3: `WorkSection.tsx:38` — 라이브 카드 `bg-white` 하드코딩
@@ -25,12 +28,14 @@
 - N10: `ContactSection.tsx:30` — 배경 FORMA 텍스트 `--font-sans` → `--font-display` 정렬
 
 ## 추가 디자인 레퍼런스 적용 태스크
+
 - D1: `FloatingNav` — `backdrop-blur-md` + `bg-black/50` + `border-white/5` 스타일 (레퍼런스 참조)
 - D2: `WorkSection` — 벤토 그리드 카드 구조 개선 (레퍼런스: `bg-zinc-900/50 border border-white/5 rounded-3xl h-[320px]` 패턴)
 - D3: `HeroSection` — 상태 배지 (pulse dot + "Available" 텍스트) 추가 고려
 - D4: 전체 다크 섹션 배경색 `#09090b` 계열로 통일 (레퍼런스 `bg-[#09090b]`)
 
 ## 태스크 순서
+
 T1: globals.css — cursor fix (M7) + 토큰 추가 (--color-dark-border, --color-dark-surface, --color-ink-inverted, --color-gold-border, --color-gold-glow)
 T2: Footer.tsx — 색상 토큰 교체 (M4)
 T3: ContactSection.tsx — 색상 교체 + 폰트 (M2, M3, N10)

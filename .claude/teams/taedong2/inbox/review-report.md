@@ -7,6 +7,7 @@
 ---
 
 ### 검토 파일
+
 - `app/globals.css`
 - `components/nav/FloatingNav.tsx`
 - `components/sections/HeroSection.tsx`
@@ -19,16 +20,16 @@
 
 ### 핵심 체크포인트 결과
 
-| 항목 | 상태 | 비고 |
-|------|------|------|
-| LazyMotion 패턴 (`m.*`) | PASS | 전 파일 `motion.*` 0건, `m.*` 패턴 정상 |
-| useReducedMotion 유지 | PARTIAL | WorkSection initial/whileInView 분기 누락 (아래 상세) |
-| WorkSection bento 12-col | PASS | col-span-8/4/6/6 정상 적용 |
-| ServiceSection 화이트 섹션 | PASS | `bg-white text-black rounded-[48px] mx-4 mb-4` 정상 |
-| HeroSection 배지 | PASS | `text-blue-400 font-mono tracking-widest` 존재 |
-| globals.css 변수 | PASS | `--color-dark-bg: #050505`, `--color-ink: #ededed` 정상 |
-| 접근성 텍스트 대비 | PASS | text-black/text-zinc-600 on white 대비 충족 |
-| TypeScript 오류 | PASS | frontend-done.md tsc --noEmit 0 오류 확인 |
+| 항목                       | 상태    | 비고                                                    |
+| -------------------------- | ------- | ------------------------------------------------------- |
+| LazyMotion 패턴 (`m.*`)    | PASS    | 전 파일 `motion.*` 0건, `m.*` 패턴 정상                 |
+| useReducedMotion 유지      | PARTIAL | WorkSection initial/whileInView 분기 누락 (아래 상세)   |
+| WorkSection bento 12-col   | PASS    | col-span-8/4/6/6 정상 적용                              |
+| ServiceSection 화이트 섹션 | PASS    | `bg-white text-black rounded-[48px] mx-4 mb-4` 정상     |
+| HeroSection 배지           | PASS    | `text-blue-400 font-mono tracking-widest` 존재          |
+| globals.css 변수           | PASS    | `--color-dark-bg: #050505`, `--color-ink: #ededed` 정상 |
+| 접근성 텍스트 대비         | PASS    | text-black/text-zinc-600 on white 대비 충족             |
+| TypeScript 오류            | PASS    | frontend-done.md tsc --noEmit 0 오류 확인               |
 
 ---
 
@@ -44,6 +45,7 @@ Framer Motion의 JS 애니메이션은 CSS 미디어 쿼리 억제 대상이 아
 HeroSection·StorySection은 `prefersReduced` 분기가 `initial`에도 적용되어 있어 WorkSection만 일관성이 깨짐.
 
 권고: `initial` 및 `whileInView`에 동일한 패턴 적용.
+
 ```tsx
 // 수정 전
 initial={{ opacity: 0, y: 20 }}
@@ -63,6 +65,7 @@ initial={{ opacity: 0 }}
 whileInView={{ opacity: 1 }}
 transition={{ duration: 0.6, delay: 0.3 }}
 ```
+
 opacity만 변경하므로 WCAG 2.3.3(모션 억제) 위반 수준은 아니지만, delay 0.3이 잔류하여
 reduced motion 사용자에게 의도치 않은 지연을 줄 수 있다. transition에 `prefersReduced ? { duration: 0.01 } : ...` 분기 권고.
 
