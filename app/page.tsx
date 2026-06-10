@@ -1,60 +1,28 @@
-import { LoadingOverlay } from '@/components/ui/LoadingOverlay'
-import { FloatingNav }    from '@/components/nav/FloatingNav'
-import { HeroSection }    from '@/components/sections/HeroSection'
-import { OriginSection }  from '@/components/sections/OriginSection'
-import { ValuesSection }  from '@/components/sections/ValuesSection'
-import { WorkSection }    from '@/components/sections/WorkSection'
-import { StorySection }   from '@/components/sections/StorySection'
-import { ServiceSection } from '@/components/sections/ServiceSection'
-import { ContactSection } from '@/components/sections/ContactSection'
-import { ContactModal }   from '@/components/ui/ContactModal'
-import { Footer }         from '@/components/layout/Footer'
-import { ScrollReveal }   from '@/components/layout/ScrollReveal'
+import type { Metadata } from 'next'
+
+import { TaedongLanding } from '@/components/landing/TaedongLanding'
 import { ScrollProgress } from '@/components/ui/ScrollProgress'
-import { SectionNav }     from '@/components/ui/SectionNav'
+
+export const metadata: Metadata = {
+  title: '태동 | 고대 전시관 랜딩',
+  description:
+    '고대 그리스 전시관을 걷듯 스크롤하며 태동의 철학, 제작 역량, 컬렉션을 경험하는 몰입형 메인 랜딩 페이지.',
+  keywords: ['태동', 'Taedong', '브랜드 랜딩', '인터랙티브 웹', '전시형 홈페이지'],
+  openGraph: {
+    title: '태동 | 고대 전시관 랜딩',
+    description:
+      '전시관을 이동하듯 브랜드를 경험하는 태동의 몰입형 메인 페이지.',
+    siteName: 'Taedong',
+    locale: 'ko_KR',
+    type: 'website',
+  },
+}
 
 export default function HomePage() {
   return (
     <>
-      <LoadingOverlay />
-      <FloatingNav />
       <ScrollProgress />
-      <SectionNav />
-      <ContactModal />
-
-      <main>
-        {/* Hero — 자체 패럴랙스가 있으므로 subtle 강도 */}
-        <ScrollReveal intensity="subtle">
-          <HeroSection />
-        </ScrollReveal>
-
-        <ScrollReveal intensity="medium">
-          <OriginSection />
-        </ScrollReveal>
-
-        <ScrollReveal intensity="medium">
-          <WorkSection />
-        </ScrollReveal>
-
-        <ScrollReveal intensity="medium">
-          <ValuesSection />
-        </ScrollReveal>
-
-        <ScrollReveal intensity="medium">
-          <StorySection />
-        </ScrollReveal>
-
-        <ScrollReveal intensity="medium">
-          <ServiceSection />
-        </ScrollReveal>
-
-        {/* Contact — 다크 섹션, subtle 로 안정적 전환 */}
-        <ScrollReveal intensity="subtle">
-          <ContactSection />
-        </ScrollReveal>
-      </main>
-
-      <Footer />
+      <TaedongLanding />
     </>
   )
 }
