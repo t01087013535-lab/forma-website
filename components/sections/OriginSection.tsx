@@ -88,7 +88,7 @@ export function OriginSection() {
                 lineHeight: 2.0,
               }}
             >
-              로마 건축가들이 설계도를 "forma"라 불렀습니다.<br />
+              로마 건축가들이 설계도를 &ldquo;forma&rdquo;라 불렀습니다.<br />
               모든 위대한 구조물은<br />
               보이지 않는 형태에서 시작됩니다.<br />
               우리는 그 이름을 계승합니다.

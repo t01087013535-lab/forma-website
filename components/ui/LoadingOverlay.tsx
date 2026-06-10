@@ -19,7 +19,7 @@ export function LoadingOverlay({
   const [progress,    setProgress]    = useState(0)
   const prefersReduced = useReducedMotion()
   const dismissed      = useRef(false)
-  const mountedAt      = useRef(Date.now())
+  const mountedAt      = useRef<number | null>(null)
 
   const dismiss = () => {
     if (dismissed.current) return
@@ -30,24 +30,25 @@ export function LoadingOverlay({
   /* ── 진행 바 애니메이션 & 하드 타임아웃 ── */
   useEffect(() => {
     const start    = Date.now()
+    if (mountedAt.current === null) mountedAt.current = start
     const interval = setInterval(() => {
       setProgress(Math.min((Date.now() - start) / maxDuration, 1))
     }, 50)
     const timeout = setTimeout(dismiss, maxDuration)
     return () => { clearInterval(interval); clearTimeout(timeout) }
-  }, [maxDuration]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [maxDuration])
 
   /* ── prefers-reduced-motion: 빠른 종료 ── */
   useEffect(() => {
     if (!prefersReduced) return
-    setTitleReady(true)
-    const t = setTimeout(dismiss, 800)
-    return () => clearTimeout(t)
-  }, [prefersReduced]) // eslint-disable-line react-hooks/exhaustive-deps
+    const titleTimer = setTimeout(() => setTitleReady(true), 0)
+    const dismissTimer = setTimeout(dismiss, 800)
+    return () => { clearTimeout(titleTimer); clearTimeout(dismissTimer) }
+  }, [prefersReduced])
 
   /* ── 영상 재생 준비 완료 핸들러 ── */
   const handleCanPlay = () => {
-    const elapsed   = Date.now() - mountedAt.current
+    const elapsed   = Date.now() - (mountedAt.current ?? Date.now())
     const remaining = Math.max(0, minDuration - elapsed)
     setTimeout(() => setTitleReady(true), 200)
     setTimeout(dismiss, remaining)

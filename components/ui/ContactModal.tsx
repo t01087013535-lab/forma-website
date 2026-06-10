@@ -97,6 +97,8 @@ export function ContactModal() {
     return () => { document.body.style.overflow = '' }
   }, [isOpen])
 
+  function close() { setIsOpen(false) }
+
   useEffect(() => {
     if (!isOpen) return
     function onKeyDown(e: KeyboardEvent) {
@@ -114,8 +116,6 @@ export function ContactModal() {
     document.addEventListener('keydown', onKeyDown)
     return () => document.removeEventListener('keydown', onKeyDown)
   }, [isOpen])
-
-  function close() { setIsOpen(false) }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
