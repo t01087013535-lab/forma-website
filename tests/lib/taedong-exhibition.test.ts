@@ -4,7 +4,7 @@ import assert from 'node:assert/strict'
 import {
   buildExhibitionNavigation,
   buildExhibitionRooms,
-} from '../../lib/taedong-exhibition.ts'
+} from '../../lib/taedong-exhibition'
 
 test('buildExhibitionRooms returns the five rooms in the approved narrative order', () => {
   const rooms = buildExhibitionRooms()
